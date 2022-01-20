@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+	<title>Synth</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="icon" type="image/png" sizes="174x174" href="./favicon.png">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.4.3/webcomponents-bundle.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet"/>
+	<script src="https://tonejs.github.io/build/Tone.js"> </script>
+	<script src="https://tonejs.github.io/examples/js/tone-ui.js"></script>
+	<script src="https://tonejs.github.io/examples/js/components.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+	<!--<script src="../build/Tone.js"></script>
+	<script src="./js/tone-ui.js"></script>
+	<script src="./js/components.js"></script>-->
+</head>
+<body>
+	<link rel="icon" href="data:;base64,=">
+	<style>
+		tone-piano {
+			margin-bottom: 10px;
+		}
+	</style>
+	<tone-example label="Synth">
+		<div slot="explanation">
+			<a href="https://tonejs.github.io/docs/Synth" target="_blank">Tone.Synth</a> is composed simply of a 
+			<a href="https://tonejs.github.io/docs/OmniOscillator" target="_blank">Tone.OmniOscillator</a>
+			routed through a 
+			<a href="https://tonejs.github.io/docs/AmplitudeEnvelope" target="_blank">Tone.AmplitudeEnvelope</a>. 
+		</div>
+
+		<div id="content">
+		</div>
+		<h1> test</h1>
+	</tone-example>
+
+	<script type="text/javascript">
+
+		
+		//MQTT functions
+		var mqtt;
+		var host = "192.168.1.219";
+		var port = 9001;
+
+		function onConnect(){
+			// Once a connection has been made, make a subscription and send a message.
+			console.log("connected successfully");
+
+			message = new Paho.MQTT.Message("Hello");
+			message.destinationName = "capivara-midi/test/";
+			mqtt.send(message);
+			console.log("test");
+
+		/*	mqtt.subscribe("visusguest-midi/test/");
+			message = new Paho.MQTT.Message("Hello");
+			message.destinationName = "World";
+			mqtt.send(message);
+		*/	
+		}
+
+		function MQTTconnect()
+		{
+			console.log("connecting to host");
+			mqtt = new Paho.MQTT.Client(host, port,  "clientID");
+			var options = {
+				timeout: 3,
+				onSuccess: onConnect,
+			};
+			mqtt.connect(options);
+		}
+
+
+		MQTTconnect();
+
+
+	/*	
+		mqtt.onConnectionLost = onConnectionLost;
+		mqtt.onMessageArrived = onMessageArrived;
+
+		mqtt.connect({onSuccess:onConnect});
+
+		//set callback handlers
+		function onConnectionLost (responseObject) {
+			console.log("Connection Lost: "+responseObject.errorMessage);
+		}
+
+		function onMessageArrived(message) {
+		console.log("Message Arrived: "+message.payloadString);
+		}
+
+*/
+
+		const synth = new Tone.Synth({
+			oscillator: {
+				type: "amtriangle",
+				harmonicity: 0.5,
+				modulationType: "sine"
+			},
+			envelope: {
+				attackCurve: "exponential",
+				attack: 0.05,
+				decay: 0.2,
+				sustain: 0.2,
+				release: 1.5,
+			},
+			portamento: 0.05
+		}).toDestination();
+
+		navigator.requestMIDIAccess().then(access => {
+				const devices = access.inputs.values();
+				for(let device of devices)
+					device.onmidimessage = onMidiMessage;
+				
+			}).catch(console.error)
+
+			function onMidiMessage(message)
+			{
+				var topic;
+				var knob = 1;
+				var trunc;
+				var messageValue;
+				//Envelop change (knobs):
+				//Attack
+				var convertedValue = convertTo01(message.data[2]);
+				
+				switch(message.data[1])
+				{
+					case 14:
+						topic = "envelope/attack";
+						synth.envelope.attack = convertedValue;
+						messageValue = convertToEnvelope(message.data[2]);
+						console.log(topic);
+						break;
+					case 15:
+						topic = "envelope/decay";
+						console.log(topic);
+						synth.envelope.decay = convertedValue;
+						messageValue = convertToEnvelope(message.data[2]);
+						break;
+
+					case 16: 
+						topic = "envelope/sustain";			
+						synth.envelope.sustain = convertTo01(message.data[2]);
+						messageValue = convertTo01(message.data[2]);
+						console.log(topic);
+						break;
+
+					case 17:
+						topic = "envelope/release";
+						synth.envelope.release = convertedValue;
+						messageValue = convertToEnvelope(message.data[2]);
+						console.log(topic);
+						break;
+
+					
+
+					case 18:
+						topic = "oscillator/harmonicity";			
+						break;
+
+					case 19:
+						topic = "oscillator/partialCount";
+						break;
+
+					case 20:
+						topic = "oscillator/phase";
+						break;
+
+
+					case 21:
+						topic = "oscillator/type";
+						break;
+					case 86: 
+						topic = "profile/save"
+
+					default:
+						knob = 0;
+				}
+			
+				if(knob == 1){
+						console.log(message.data);
+						mqttmsg = new Paho.MQTT.Message(messageValue.toString());
+						mqttmsg.destinationName = "capivara-midi/"+topic;
+						mqtt.send(mqttmsg);
+						console.log("converted value: "+ messageValue);
+
+				}			
+							/*
+
+								//initial point 
+								coordinate = [0,0]
+								cummulative = attack;
+								vals.push(cummulative);
+								//attack
+								coordinate = [attack, 127];
+								cummulative += decay;
+								vals.push(cummulative);
+
+								//decay
+								coordinate = [cummulative, sustain];
+								cummulative += sustain;
+								vals.push(cummulative);
+
+
+								//sustain
+								coordinate = [cummulative, 0]
+								vals.push(cummulative);
+
+
+								*/
+			}
+
+
+			//converts the value between 0 and 127 to 0 and 1
+			function convertTo01(value)
+			{
+				if(value > 0)
+				{
+					return (value/127);	
+				}
+					
+				else
+				{
+					return 0;	
+				}
+			}
+
+			//converts the value between 0 and 127 to a value between 0 and 25
+			function convertToEnvelope(value)
+			{
+				if(value > 0)
+				{
+					//console.log(Math.trunc(((value*25)/127)));
+					trunc = Math.trunc(((value*25)/127));
+					return trunc;
+				}			
+				else
+				{
+					return 0;
+				}	
+			}
+
+
+		piano({
+			tone: synth,
+			parent: document.querySelector("#content"),
+			noteon: (note) => synth.triggerAttack(note.name),
+			noteoff: (note) => synth.triggerRelease()
+		});
+
+		ui({
+			tone: synth,
+			name: "Synth",
+			parent: document.querySelector("#content"),
+		});
+
+	</script>
+</body>
+</html>
+

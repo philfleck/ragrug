@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <link rel="stylesheet" type="text/css" href="./main.css" />
+    <script type='text/javascript' src="./jQuery"></script>
+    <script type='text/javascript' src="./json2html.js"></script>
+    <script type='text/javascript' src="./runtime.js"></script>
+    <!-- <script type='text/javascript' src="./main.js"></script> -->
+    <script type='text/javascript' src="./chartsub.js"></script>
+    <title>Chartsub</title>
+
+    <style>
+        .titlebar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 95vw;
+            height: 10vh;
+            margin: 1vh;
+            padding: 2vh;
+            font-size: 8vh;
+            font-weight: bold;
+            color: rgb(238,238,238);
+            background-color: rgb(0,77,109); /*rgb(49,182,188);*/
+            border: solid rgb(238,238,238) 2px;
+            display: block;
+        }
+
+        .rr-canvas-wrap {
+            position: absolute;
+            top: 17vh;
+            width: 95vw;
+            height: 80vh;
+            margin: 1vh;
+            padding: 2vh;
+            background-color: rgb(49,182,188);
+            border: solid rgb(238,238,238) 2px;
+            display: block;
+        }
+
+        .rr-canvas-style {
+            padding: 2vh;
+            margin: 1vh;
+            width: 93vw;
+            height: 100%;
+        }
+
+            .rr-canvas-style button {
+                font-weight: bold;
+                font-size: 8vh;
+                margin: 3vh;
+                padding: 2vh;
+                background-color: rgb(0,77,109);
+                border: solid rgb(238,238,238) 2px;
+                border-radius: 1vh;
+                width: 45%;
+                float: left;
+                display: block;
+            }
+
+                .rr-canvas-style button:hover {
+                    background-color: rgb(49,122,128);
+                }
+    </style>
+</head>
+<body>
+    <div id="titlebar" class="titlebar">
+
+    </div>
+    <div class="rr-canvas-wrap">
+        <div class="rr-canvas-style" id="chartsubhook">
+            
+            <!--
+            <button id="btn_adddim" onclick="PlayClick();ChartSub_ButtonClick('COLORDIM');">ColorD</button>
+            <button id="btn_adddim" onclick="PlayClick();ChartSub_ButtonClick('SIZEDIM');">SizeD</button>
+            <button id="btn_adddim" onclick="PlayClick();ChartSub_ButtonClick('XDIM');">Set X</button>
+            <button id="btn_adddim" onclick="PlayClick();ChartSub_ButtonClick('YDIM');">Set Y</button>
+            <button id="btn_adddim" onclick="PlayClick();ChartSub_ButtonClick('ZDIM');">Set Z</button>
+            <button id="btn_adddim" onclick="PlayClick();ChartSub_ButtonClick('ADDDIM');" Add=Add Dimension=Dimension</button>
+            <button id="btn_adddim" onclick="PlayClick();ChartSub_ButtonClick('TXCAT');">X Cat</button>
+            <button id="btn_adddim" onclick="PlayClick();ChartSub_ButtonClick('TYCAT');">Y Cat</button>
+            <button id="btn_adddim" onclick="PlayClick();ChartSub_ButtonClick('TZCAT');">Z Cat</button>
+            <button id="btn_adddim" onclick="PlayClick();ChartSub_ButtonClick('TXORI');">X Label Ori</button>
+            <button id="btn_adddim" onclick="PlayClick();ChartSub_ButtonClick('TYORI');">Y Label Ori</button>
+            <button id="btn_adddim" onclick="PlayClick();ChartSub_ButtonClick('TZORI');">Z Label Ori</button>
+            <button id="btn_adddim" onclick="PlayClick();ChartSub_ButtonClick('TXTICK');">X Tick</button>
+            <button id="btn_adddim" onclick="PlayClick();ChartSub_ButtonClick('TYTICK');">Y Tick</button>
+            <button id="btn_adddim" onclick="PlayClick();ChartSub_ButtonClick('TZTICK');">Z Tick</button>
+            <button id="btn_copy" onclick="PlayClick();ChartSub_ButtonClick('COPY');">Copy</button>
+            <button id="btn_close" onclick="PlayClick();ChartSub_ButtonClick('CLOSE');">Close</button>
+            <button id="btn_taptoplace" onclick="PlayClick();ChartSub_ButtonClick('TAP2PLACE');">Toggle Tap2Place</button>
+            <button id="btn_bounds" onclick="PlayClick();ChartSub_ButtonClick('BOUNDS');">Toggle Bounds</button>
+            <button id="btn_bounds" onclick="PlayClick();ChartSub_ButtonClick('OBJMANI');">Toggle Manipulation</button>
+            -->
+        </div>
+    </div>
+    <script>
+        ChartSub_Init();
+    </script>
+</body>
+</html>

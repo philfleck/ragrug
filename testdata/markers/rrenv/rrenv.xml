@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="vis4" size="0.060000 0.070000" />
+    <ImageTarget name="vis3" size="0.060000 0.070000" />
+    <ImageTarget name="vis2" size="0.060000 0.070000" />
+    <ImageTarget name="vis1" size="0.060000 0.070000" />
+    <ImageTarget name="vis0" size="0.060000 0.070000" />
+  </Tracking>
+</QCARConfig>

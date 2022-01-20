@@ -1,0 +1,142 @@
+{
+  "_id": "ASUS_5G",
+  "_rev": "31-ae62efc830ecc404d3cba41c21e4b149",
+  "name": "ASUS_5G",
+  "type": "location",
+  "numwabatches": 0,
+  "Xnumwabatches": 524,
+  "waprefix": "ASUS_5G-WA-",
+  "imagetargetenv": [
+    "mopop_userstudy.xml",
+    "mopop_userstudy.dat"
+  ],
+  "moreassets": [
+    "sc.ab"
+  ],
+  "envassetbundle": "mopop.ab",
+  "mopop": {
+    "artefacts": {},
+    "temptables": [
+      {
+        "name": "morespace",
+        "displayname": "More Space",
+        "width": 2,
+        "height": 2,
+        "tilemodel": "HookTile",
+        "tilesize": 0.3,
+        "transform": {
+          "position": [
+            3.6903862953186035,
+            1.5391285419464111,
+            -0.7119606733322144
+          ],
+          "rotation": [
+            -0.0010081827640533447,
+            -0.02216522768139839,
+            0.7578935027122498,
+            -0.652000904083252
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "name": "infotable",
+        "displayname": "Infotable",
+        "width": 1,
+        "height": 1,
+        "tilemodel": "HookTile",
+        "tilesize": 0.3,
+        "transform": {
+          "position": [
+            0.8489093780517578,
+            2.124091863632202,
+            -0.4432793855667114
+          ],
+          "rotation": [
+            -0.005751699674874544,
+            0.020429285243153572,
+            -0.6883369088172913,
+            0.725080668926239
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ],
+    "hookwalls": [
+      {
+        "name": "popwall",
+        "reversed": false,
+        "displayname": "Pop Culture",
+        "genre": "pop",
+        "width": 14,
+        "height": 9,
+        "tilemodel": "HookTile",
+        "tilesize": 0.1,
+        "timeline": {
+          "start": 1990,
+          "end": 2000,
+          "tick": 1
+        },
+        "transform": {
+          "position": [
+            3.501185178756714,
+            3.656670331954956,
+            -0.48437023162841797
+          ],
+          "rotation": [
+            0.4633844494819641,
+            -0.4731798470020294,
+            -0.519180178642273,
+            0.5402107834815979
+          ],
+          "scale": [
+            1.2606364488601685,
+            1.2606364488601685,
+            1.2606364488601685
+          ]
+        }
+      },
+      {
+        "name": "rockwall",
+        "reversed": true,
+        "displayname": "Rock 'n' Roll",
+        "genre": "rock",
+        "width": 14,
+        "height": 9,
+        "tilemodel": "HookTile",
+        "tilesize": 0.1,
+        "timeline": {
+          "start": 1990,
+          "end": 2000,
+          "tick": 1
+        },
+        "transform": {
+          "position": [
+            1.9141560792922974,
+            2.084322452545166,
+            -0.37768182158470154
+          ],
+          "rotation": [
+            0.44520699977874756,
+            0.4750056862831116,
+            0.5560965538024902,
+            0.5166400671005249
+          ],
+          "scale": [
+            1.2262479066848755,
+            1.2262479066848755,
+            1.2262479066848755
+          ]
+        }
+      }
+    ]
+  }
+}

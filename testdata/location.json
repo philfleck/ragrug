@@ -1,0 +1,136 @@
+{
+  "_id": "NETGEAR81-5G",
+  "_rev": "38-ec76a3703b090a71fda4b97f2fbfdbab",
+  "name": "NETGEAR81-5G",
+  "type": "location",
+  "numwabatches": 446,
+  "waprefix": "NETGEAR81-5G-WA-",
+  "Xassetsurl": "http://vizario-dev.ddns.net:59876/f/AssetBundles/rrassets0.b64",
+  "Xassetsname": "rrassets0",
+  "Xassetshash": "http://vizario-dev.ddns.net:59876/f/AssetBundles/rrassets0.b64.hash",
+  "imagetargetenv": [
+    "mopop_01.xml",
+    "mopop_01.dat"
+  ],
+  "envassetbundle": "mopop.ab",
+  "mopop": {
+    "temptables": [
+      {
+        "name": "morespace",
+        "displayname": "More Space",
+        "width": 2,
+        "height": 2,
+        "tilemodel": "HookTile",
+        "tilesize": 0.085,
+        "transform": {
+          "position": [
+            1,
+            -0.34729713201522827,
+            0
+          ],
+          "rotation": [
+            -0.707,
+            0,
+            0,
+            0.707
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ],
+    "hookwalls": [
+      {
+        "name": "popwall",
+        "displayname": "Pop Culture",
+        "width": 5,
+        "height": 3,
+        "tilemodel": "HookTile",
+        "tilesize": 0.085,
+        "timeline": {
+          "start": 2000,
+          "end": 2020,
+          "tick": 1
+        },
+        "transform": {
+          "position": [
+            0.7471563220024109,
+            -0.004840889014303684,
+            0.3124569356441498
+          ],
+          "rotation": [
+            -0.0017734693828970194,
+            -0.9738084077835083,
+            -0.051809195429086685,
+            0.22138185799121857
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "name": "rockwall",
+        "displayname": "Rock 'n' Roll",
+        "width": 4,
+        "height": 3,
+        "tilemodel": "HookTile",
+        "tilesize": 0.085,
+        "timeline": {
+          "start": 2000,
+          "end": 2020,
+          "tick": 1
+        },
+        "transform": {
+          "position": [
+            -0.5965255498886108,
+            -0.04345269128680229,
+            0.27294889092445374
+          ],
+          "rotation": [
+            0.0734972432255745,
+            -0.8851593732833862,
+            -0.12733305990695953,
+            -0.4414491355419159
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ],
+    "artefacts": {
+      "givinitup": {
+        "name": "givinitup",
+        "id": "givinitup"
+      },
+      "timetomove": {
+        "name": "timetomove",
+        "id": "timetomove"
+      },
+      "redearth": {
+        "name": "redearth",
+        "id": "redearth"
+      },
+      "zooropa": {
+        "name": "zooropa",
+        "id": "zooropa"
+      },
+      "onehotminute": {
+        "name": "onehotminute",
+        "id": "onehotminute"
+      },
+      "nightcap": {
+        "name": "nightcap",
+        "id": "nightcap"
+      }
+    }
+  }
+}

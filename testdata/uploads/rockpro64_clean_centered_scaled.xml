@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+<Tracking>
+<ModelTarget name="rockpro64_clean_centered_scaled" motionHint="static" trackingMode="scan"/>
+
+</Tracking>
+
+<Assembly name="rockpro64_clean_centered_scaleds_assembly" assemblyId="67d4a399ec774f5c9536e054139d8990">
+<Part name="rockpro64_clean_centered_scaled" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="-0.0013483 -0.00260804 0.141282" rotation="AD: 0.9999999838756731 0.03601705188749767 -0.0050377471479093015 164.086" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARConfig>

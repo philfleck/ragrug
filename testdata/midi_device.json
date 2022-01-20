@@ -1,0 +1,37 @@
+{
+  "_id": "visusguest-midi",
+  "_rev": "8-3b2a300f43fc5e86b9c14f3358a490e3",
+  "Xmodelname": "midi",
+  "devicename": "midi",
+  "registered": true,
+  "Xassetname": "midi.ab",
+  "commonname": "midi",
+  "locationkey": "visusguest",
+  "locationpath": "inffeld16/2nd/id2068",
+  "scale": 1,
+  "id": "visusguest-midi",
+  "parts": [],
+  "ondevicecontrols": {
+    "controlurl": "http://10.0.0.2:9999/midi.html",
+    "width": 1,
+    "height": 1
+  },
+  "transform": {
+    "position": [
+      0.2739790201187134,
+      -0.34729713201522827,
+      0.4392329454421997
+    ],
+    "rotation": [
+      0.19814874231815338,
+      0.742375373840332,
+      0.5748777985572815,
+      -0.2813031077384949
+    ],
+    "scale": [
+      1.0000001192092896,
+      0.9999998807907104,
+      1.0000001192092896
+    ]
+  }
+}

@@ -1,0 +1,359 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" href="./main.css" />
+    <script type='text/javascript' src="./jQuery"></script>
+    <script type='text/javascript' src="./json2html.js"></script>
+    <script type='text/javascript' src="./runtime.js"></script>
+    <script type='text/javascript' src="./main.js"></script>
+    <!--<script type='text/javascript' src="./mopop.js"></script>-->
+    <script type='text/javascript' src="./cnr.js"></script>
+
+    <title>RR0</title>
+
+</head>
+
+<body class="">
+
+
+    <div class="menu toppos1 dbg" id="rr_menu">
+        <div class="menuentry">
+            <button class="rr-button" id="rr_btn_toggle_dbg">
+                <i class="material-icons md-f">&#xe868;</i>
+                <p>Toggle Debug</p>
+            </button>
+        </div>
+        <div class="menuentry">
+            <button class="rr-button" id="rr_btn_reload">
+                <i class="material-icons md-f">&#xe8b3;</i>
+                <p>Reload</p>
+            </button>
+        </div>
+        <div class="menuentry">
+            <button class="rr-button" id="rr_btn_pin">
+                <i class="material-icons md-f">&#xe0c8;</i>
+                <p>Pin</p>
+            </button>
+        </div>
+        <div class="menuentry">
+            <button class="rr-button" id="rr_btn_locate">
+                <i id="rr_locate_state" class="material-icons md-f">&#xe55c;</i>
+                <p>Localize</p>
+            </button>
+        </div>
+        <!-- class=window-content draggable='true' -->
+        <!-- <div class='window-content' draggable="true"> -->
+        <div class="menuentry">
+            <button class="rr-button" id="rr_btn_registerdevice">
+                <i id="rr_registerd_state" class="material-icons md-f">&#xe912;</i>
+                <p>Devices</p>
+            </button>
+        </div>
+        <!-- </div> s-->
+        <div class="menuentry">
+            <button class="rr-button" id="rr_btn_testreg">
+                <i class="material-icons md-f">&#xe89f;</i>
+                <p>TestReg</p>
+            </button>
+        </div>
+        <div class="menuentry">
+            <button class="rr-button" id="rr_btn_graphcomp">
+                <i class="material-icons md-f">&#xe24b;</i>
+                <p>Compare</p>
+            </button>
+        </div>
+
+        <div class="menuentry">
+            <button class="rr-button" id="rr_btn_canvas">
+                <i class="material-icons md-f">&#xe24b;</i>
+                <p>Canvas</p>
+            </button>
+        </div>
+
+        <div class="menuentry">
+            <button class="rr-button" id="rr_btn_mopop">
+                <i class="material-icons md-f">&#xe24b;</i>
+                <p>Mopop</p>
+            </button>
+        </div>
+
+        <div class="menuentry">
+            <button class="rr-button" id="rr_btn_iatk">
+                <i class="material-icons md-f">&#xe24b;</i>
+                <p>IATK T</p>
+            </button>
+        </div>
+        <!--
+        <div class="menuentry">
+            <button class="rr-button" id="rr_btn_sc">
+                <i class="material-icons md-f">&#xe24b;</i>
+                <p>SC</p>
+            </button>
+        </div>
+        -->
+        <!-- <div class="menuentry"> <a href="#" class="rr-button" id="rr_btn_locate">Locate</a> </div> --> <!-- onclick="Main_LocateArea(event);" -->
+        <!-- <div class="menuentry"> <a href="#" class="rr-button" onclick="ButtonTest(event, false);">Download WA</a> </div> -->
+        <!-- <div class="menuentry"> <a href="#" class="rr-button" onclick="ButtonTest(event, true);">Check WA</a> </div> -->
+        <div class="clear"></div>
+
+        <div class="bigtext" id="rr_graphcomp">rr_graphcomp</div>
+
+        <div class="rr-canvas-wrap" id="rr_canvas_wrap">
+            <div class="rr-canvas-style" id="rr_canvas_style">
+                <button id="" class='XXrr-customval' onclick="PlayClick();Main_CanvasHide();">
+                    Close
+                </button>
+                <button id="" class='XXrr-customval' onclick="PlayClick();Main_CanvasStyleClick('IATKChart');">
+                    IATK Chart
+                </button>
+                <button id="" class='XXrr-customval' onclick="PlayClick();Main_CanvasStyleClick('BarChart2D');">
+                    BarChart2D
+                </button>
+                <button id="" class='XXrr-customval' onclick="PlayClick();Main_CanvasStyleClick('BarChart3D');">
+                    BarChart3D
+                </button>
+                <button id="" class='XXrr-customval' onclick="PlayClick();Main_CanvasStyleClick('LineChart2D');">
+                    LineChart2D
+                </button>
+                <button id="" class='XXrr-customval' onclick="PlayClick();Main_CanvasStyleClick('LineChart3D');">
+                    LineChart3D
+                </button>
+                <button id="" class='XXrr-customval' onclick="PlayClick();Main_CanvasStyleClick('Scatterplot2D_Billboards');">
+                    ScatterPlott2D
+                </button>
+                <button id="" class='XXrr-customval' onclick="PlayClick();Main_CanvasStyleClick('Scatterplot3D_Cubes');">
+                    ScatterPlott3D
+                </button>
+                <button id="" class='XXrr-customval' onclick="PlayClick();Main_CanvasStyleClick('Heightmap');">
+                    Heightmap
+                </button>
+                <button id="" class='XXrr-customval' onclick="PlayClick();Main_CanvasStyleClick('ParallelCoordinates');">
+                    ParallelCoordinates
+                </button>
+            </div>
+            <div class="rr-canvas-attr" id="rr_canvas_attr">
+                rr_canvas_attr
+            </div>
+        </div>
+
+
+        <!-- extra testing env -->
+        <div class="rr-canvas-wrap" id="rr_mopop_testing">
+            <div class="rr-canvas-style" id="rr_mopop_top">
+                <button id="rr_mopop_testdb" class='XXrr-customval' onclick="PlayClick();MOPOP_InitEnv();">
+                    Init Mopop
+                </button>
+                <button id="rr_mopop_testdb" class='XXrr-customval' onclick="PlayClick();MOPOP_TestDB();">
+                    Load DB and Start tracking
+                </button>
+                <button id="" class='XXrr-customval' onclick="PlayClick(); MOPOP_ToggleWallManipulation();">
+                    Toggle Manipulation
+                </button>
+                <button id="" class='XXrr-customval' onclick="PlayClick(); MOPOP_SaveEnv();">
+                    Save Environment
+                </button>
+                <button id="" class='XXrr-customval' onclick="PlayClick(); MOPOP_AddAnchors();">
+                    Add Anchors
+                </button>
+                <button id="" class='XXrr-customval' onclick="PlayClick(); MOPOP_MenuHide();">
+                    Close
+                </button>
+                <!-- <button id="rr_mopop_testdb" class='XXrr-customval' onclick="PlayClick();MOPOP_Register('STORAGEA');">
+                    Register Storage A
+                </button> -->
+                <!-- <button id="rr_mopop_testdb" class='XXrr-customval' onclick="PlayClick();MOPOP_Register('STORAGEB');">
+                    Register Storage B
+                </button> -->
+                <!-- <button id="rr_mopop_testdb" class='XXrr-customval' onclick="PlayClick();MOPOP_Register('HOOKWALLA');">
+                    Register HookWall A
+                </button> -->
+                <!-- <button id="rr_mopop_testdb" class='XXrr-customval' onclick="PlayClick();MOPOP_Register('HOOKWALLB');">
+                    Register HookWall B
+                </button> -->
+                <!-- <button id="rr_mopop_testdb" class='XXrr-customval' onclick="PlayClick();MOPOP_Register('TABLETOP');">
+                    Register Temp Table
+                </button> -->
+
+            </div>
+            <div class="rr-canvas-attr mopop-bottom" id="rr_mopop_bottom">
+                <p><span>Picked:</span><span id="rr_mopop_bottom_picked">not set</span></p>
+                <p><span>Info:</span><span id="rr_mopop_bottom_info">not set</span></p>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <div class="rr-canvas-wrap" id="rr_mopop_u_started">
+    </div>
+
+
+
+
+    <div id="ws_popup_hook"></div>
+
+    <script>
+
+        Main_ReportToUi("Starting RagRugZero");
+
+        RT.Web.SetTiimeout(10, function () {
+            Main_DisableDiagnostics();
+        });
+
+        $("#rr_registerd_state").removeClass("orange").removeClass("green").removeClass("red").addClass("red");
+        $("#ws_popup_hook").hide();
+        $('#rr_btn_testreg').hide();
+        //$('#rr_btn_reload').hide();
+        $('#rr_btn_graphcomp').hide();
+        $('#rr_btn_toggle_dbg').hide();
+        $('#rr_info').hide();
+        $('#rr_graphcomp').hide();
+        $('#rr_canvas_wrap').hide();
+        $('#rr_btn_pin').hide();
+
+        $('#rr_mopop_testing').hide();
+
+        Main_ReportToUi("Setting function hooks");
+        //RT.Web.StopHrefAll("rr-button");
+        RT.Web.AppendFunctionOnClick(".rr-button", "PlayClick();Main_ButtonClicked(event);");
+        RT.Web.AppendFunctionOnClick('#rr_btn_locate', "PlayClick();Main_LocateArea(event);");
+        RT.Web.AppendFunctionOnClick('#rr_btn_reload', "PlayClick();Main_Reload(event);");
+        RT.Web.AppendFunctionOnClick('#rr_btn_registerdevice', "PlayClick();Main_RegisterDevice(event);");
+        RT.Web.AppendFunctionOnClick('#rr_btn_testreg', "PlayClick();Main_TestReg(event);");
+        RT.Web.AppendFunctionOnClick("#rr_btn_toggle_dbg", "PlayClick();$('#rr_info').toggle();");
+        RT.Web.AppendFunctionOnClick('#rr_btn_graphcomp', "PlayClick();Main_CompareStreams(event);");
+        RT.Web.AppendFunctionOnClick('#rr_btn_canvas', "PlayClick();Main_Canvas(event);");
+        RT.Web.AppendFunctionOnClick('#rr_btn_pin', "PlayClick();Main_ToggleUiPinning(event);");
+
+        RT.Web.AppendFunctionOnClick("#rr_btn_mopop", "PlayClick();MOPOP_MenuShow(event);");
+        //RT.Web.AppendFunctionOnClick(".clicksound", "RT.Unity.PlayClickSound();");
+        //RT.Web.AppendFunctionOnClick("button", "RT.Unity.PlayClickSound();");
+        //RT.Web.SetTiimeout(2000, RT.Unity.PlayClickSound);
+
+        //RT.Web.AppendFunctionOnClick("#rr_btn_sc", "PlayClick();SC_LOAD(event);");
+
+        //iatk test
+        RT.Web.AppendFunctionOnClick("#rr_btn_iatk", "PlayClick();MAIN_IATKTest(event);");
+
+        RT.Web.SetTiimeout(250, function () {
+            Main_ReportToUi("Connecting Mqtt to " + MAIN.WEBAPI.mqttBrokerIp + ":" + MAIN.WEBAPI.mqttBrokerPort);
+            RT.MQTT.SetHost(MAIN.WEBAPI.mqttBrokerIp, MAIN.WEBAPI.mqttBrokerPort); //1883
+            RT.MQTT.StartClient();
+            Main_InitPosUpdater();
+        });
+
+        RT.Web.SetTiimeout(3000, function () {
+            Main_InitNodeRedLinking();
+            Main_InitInject();
+        });
+
+        //auto locate, uncomment to enable
+        //Main_LocateArea();
+
+        RT.Web.SetTiimeout(1000, Main_LocateArea);
+        RT.Reg.RegisterModelTrackedNotification(Main_ObjectTrackedState);
+
+
+        console.log("RR main.html Main_InitUserCanvas");
+        Main_InitUserCanvas();
+
+        console.log("RR main.html MAIN_Init3DButtons");
+        MAIN_Init3DButtons();
+
+
+
+
+        // SCORE TEST: DISABLE when running
+        if (true) {
+            RT.Web.SetTiimeout(3000, function () {
+                MOPOP_InitMqtt();
+                MOPOP_DownloadArtefact('15485641219');
+
+
+
+
+                //MOPOP_InitScoreChart();
+
+                /*
+                RT.Web.SetTiimeout(5000, function () {
+                    MOPOP_CalcScore();
+                });
+                RT.Web.SetTiimeout(6000, function () {
+                    MOPOP_CalcScore();
+                });
+                RT.Web.SetTiimeout(7000, function () {
+                    MOPOP_CalcScore();
+                });
+                RT.Web.SetTiimeout(8000, function () {
+                    MOPOP_CalcScore();
+                });
+                RT.Web.SetTiimeout(9000, function () {
+                    MOPOP_CalcScore();
+                });
+                */
+
+            });
+        }
+        // SCORE TEST END
+
+
+        // Testing area
+        var ntName = RT.Help.GetNetwork();
+        Main_ReportToUi("Network found [" + ntName + "]");
+
+
+        //Test notification
+        RT.Web.SetTiimeout(6000, function () {
+            RT.Unity.SpawnNotification(5, "Application Started");
+
+            //MAIN_IATKTest();
+        });
+
+        /*RT.Web.SetTiimeout(8000, function () {
+            IATK_RunTest();
+        });*/
+        /*
+        $("#rr_mopop_u_started").hide();
+        var murl = MAIN.WEBAPI.uiurl + "/mopop/mopop-opening.jpg";
+        $("#rr_mopop_u_started").html('<img src="' + murl + '" width="100%" />');
+        $("#rr_mopop_u_started").show();
+        RT.Web.SetTiimeout(8000, function () {
+            importNamespace("Vizario").AssetBundleHolder.ImportFromFile(
+                MAIN.location.envassetbundle, MAIN.location.envassetbundle);
+            MOPOP_AutoStart();
+        });
+        */
+
+        console.log("RR Setting up logo start");
+        $("#rr_menu").hide();
+        $("#ws_popup_hook").hide();
+        var murl = MAIN.WEBAPI.uiurl + "/docu/img/ragruglogo.png";
+        $("#ws_popup_hook").html('<div style="background-color:rgb(0,77,109);width:73vw;height:25vh;border-radius: 20px;border:solid white 8px;"><img src="' + murl + '" height="100%" /><div style="display:inline-block;vertical-align:top;margin-left:2vw;margin-bottom:3vh;padding:1vh;font-size:12vh;"><span style="font-size:6vh;">Welcome to</span></br>RagRug 1.2.109</div></div>');
+        $("#ws_popup_hook").show();
+        console.log("RR Setting up logo end");
+
+        RT.Web.SetTiimeout(4000, function () {
+            MAIN_Init2DMobileUi();
+            MAIN_InitIatkReplicator();
+        });
+
+        /*
+        RT.Web.SetTiimeout(6000, function () {
+            if (RT.Help.GetNetwork() == "NETGEAR81-5G") {
+                CNR_Init();
+            }
+        });
+        */
+
+        RT.Web.SetTiimeout(6000, function () {
+            MAIN_TestLocalPubSub();
+        });
+    </script>
+</body>
+
+</html>

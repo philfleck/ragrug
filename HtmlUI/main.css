@@ -1,0 +1,829 @@
+/*
+    Colors:
+    https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=00a9f4&secondary.color=FDD835&primary.text.color=000000
+*/
+
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    /*src: url(https://fonts.gstatic.com/s/materialicons/v38/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');*/
+    src: url(https://fonts.gstatic.com/s/materialiconsoutlined/v27/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2) format('woff2');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size:
+    /*64px;*/
+    /*96px;*/
+    /*48px;*/
+    24px;
+    /* Preferred icon size */
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    /*src: url('fonts/MaterialIcons-Regular.ttf');*/
+    /* For IE6-8 */
+    /*src: local('./MaterialIcons-Regular.ttf');*/
+    src: local('MaterialIconsOutlined-Regular.otf');
+}
+
+.material-icons.orange {
+    color: #ff6c00;
+}
+
+.material-icons.red {
+    color: #f44336;
+}
+
+.material-icons.green {
+    color: #4dd965;
+}
+
+.material-icons.blue {
+    color: #0000FF;
+}
+
+.material-icons.sky {
+    color: #309eeb;
+}
+
+.material-icons.contrast {
+    color: red;
+}
+
+.material-icons.orange:hover {
+    color: #c75400;
+}
+
+.material-icons.red:hover {
+    color: #de190a;
+}
+
+.material-icons.green:hover {
+    color: #15bc31;
+}
+
+.material-icons.blue:hover {
+    color: #0000e6;
+}
+
+.material-icons.sky:hover {
+    color: #0a83d8;
+}
+
+.material-icons.contrast:hover {
+    color: green;
+}
+
+
+.material-icons.md-18 {
+    font-size: 18px;
+}
+
+.material-icons.md-24 {
+    font-size: 24px;
+}
+
+.material-icons.md-36 {
+    font-size: 36px;
+}
+
+.material-icons.md-48 {
+    font-size: 48px;
+}
+
+.material-icons.md-64 {
+    font-size: 64px;
+}
+
+.material-icons.md-96 {
+    font-size: 96px;
+}
+
+.material-icons.md-128 {
+    font-size: 128px;
+}
+
+.material-icons.md-256 {
+    font-size: 256px;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+.material-icons.orange {
+    color: #ff6c00;
+}
+
+.material-icons.red {
+    color: #f44336;
+}
+
+.material-icons.green {
+    color: #4dd965;
+}
+
+.material-icons.blue {
+    color: #0000FF;
+}
+
+.material-icons.sky {
+    color: #309eeb;
+}
+
+.material-icons.gray {
+    color: darkslategray;
+}
+
+    .material-icons.gray:hover {
+        color: forestgreen;
+    }
+
+.material-icons.orange:hover {
+    color: #c75400;
+}
+
+.material-icons.red:hover {
+    color: #de190a;
+}
+
+.material-icons.green:hover {
+    color: #15bc31;
+}
+
+.material-icons.blue:hover {
+    color: #0000e6;
+}
+
+.material-icons.sky:hover {
+    color: #0a83d8;
+}
+
+
+.material-icons.md-18 {
+    font-size: 18px;
+}
+
+.material-icons.md-24 {
+    font-size: 24px;
+}
+
+.material-icons.md-36 {
+    font-size: 36px;
+}
+
+.material-icons.md-48 {
+    font-size: 48px;
+}
+
+.material-icons.md-64 {
+    font-size: 64px;
+}
+
+.material-icons.md-96 {
+    font-size: 96px;
+}
+
+.material-icons.md-128 {
+    font-size: 128px;
+}
+
+.material-icons.md-256 {
+    font-size: 256px;
+}
+
+.material-icons.md-368 {
+    font-size: 368px;
+}
+
+.material-icons.md-512 {
+    font-size: 512px;
+}
+
+.material-icons.md-f {
+    font-size: 11vh;
+}
+
+.material-icons.md-l {
+    font-size: 14vh;
+}
+
+.font-18 {
+    font-size: 24px;
+}
+
+.font-24 {
+    font-size: 24px;
+}
+
+.font-36 {
+    font-size: 24px;
+}
+
+.font-48 {
+    font-size: 48px;
+}
+
+.font-64 {
+    font-size: 48px;
+}
+
+.bold-font {
+    font-weight: bold;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.blue {
+    color: blue;
+}
+
+.pink {
+    color: pink;
+}
+
+.yellow-border {
+    border: solid yellow 5px;
+}
+
+.green-border {
+    border: solid green 5px;
+}
+
+.pink-border {
+    border: solid pink 5px;
+}
+
+.blue-border {
+    border: solid blue 5px;
+}
+
+.red-border {
+    border: solid red 5px;
+}
+
+.bg-setup {
+    background-image: url('rpi.jpg');
+    /*background-size:2100px 1000px;*/
+    background-size: 1300px auto;
+    background-repeat: no-repeat;
+}
+
+
+
+/* ---------------------------------------------------------- */
+/*
+        AR4
+        Vizario-blue #16467C
+        Primary #16467C
+        Light #4e71ac
+        Dark #00204f
+
+        Citycom
+        Dark  #004D6D   0,77,109
+        Light #31B6BC   49,182,188
+        Gray  #EEEEEE   238,238,238
+
+            */
+
+
+body,
+ul,
+a {
+    text-decoration: none;
+    list-style: none;
+    color: white;
+}
+
+scrollbar,
+scrollbutton,
+scrollthumb {
+    width: 2vw;
+    height: 2vw;
+}
+
+h1 {
+    font-size: 4vh;
+    color: white;
+}
+
+body {
+    width: 99vw;
+    height: 99vh;
+}
+
+button {
+    background: none;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
+    padding: 0;
+    margin: 0;
+}
+
+botton {
+    color: #00a9f4;
+}
+
+    botton:hover {
+        color: #007ac1;
+    }
+
+
+
+
+.toppos1 {
+    position: absolute;
+    top: 0vh;
+    left: 1vh;
+}
+
+.toppos2 {
+    position: absolute;
+    top: 25vh;
+    left: 1vh;
+}
+
+.wrapper {
+    background-color: rgba(0, 0, 0, 0.7);
+    /*border: solid white 3px;*/
+    /*width:500px;
+              height:500px;*/
+    width: 40vw;
+    height: 100vh;
+    padding: 1%;
+    margin: 5px;
+}
+
+    .wrapper div {
+        width: auto;
+        display: block;
+        margin: 1%;
+        padding: 1%;
+        background-color: silver;
+    }
+
+#myname {
+    font-weight: bold;
+    font-size: 5vw;
+}
+
+#myval {
+    color: red;
+}
+
+.bigtext {
+    font-size: 5vh;
+}
+
+.normaltext {
+    font-size: 2vh;
+}
+
+.menuentry {
+    /*font-size: 5vh;*/
+    color: black;
+    display: inline-block;
+    float: left;
+    margin: 0.4vh;
+    margin-top: 0.1vh;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+    .menuentry:hover {
+    }
+    /*
+            .menuentry:hover {
+                background-color: black;
+                color: white;
+            }
+
+            */
+    .menuentry button {
+        width: auto;
+        font-size: 6vh;
+        /*margin: 1vh;
+        padding: 1vh;*/
+        color: #03a9f4;
+        width: 26vh;
+        height: 26vh;
+    }
+
+        .menuentry button:hover {
+            /*color: cornflowerblue;*/
+            color: rgb(0,77,109);
+            margin: 0;
+            padding: 0;
+            border: solid rgb(0,77,109) 10px;
+            border-radius: 2vh;
+            background-color: rgb(49,182,188);
+        }
+
+        /*.menuentry button:focus {
+            background-color: red;
+        }
+
+        .menuentry button:active {
+            background-color: green;
+        }*/
+
+        .menuentry button i {
+            margin: 0.1vh;
+            padding: 0.1vh;
+        }
+
+        .menuentry button p {
+            margin: 0.1vh;
+            padding: 0.1vh;
+            font-size: 5vh;
+            font-weight: bold;
+            text-align: center !important;
+            vertical-align: middle !important;
+        }
+
+
+
+.rr-info {
+    width: auto;
+    display: block;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    height: 10vh;
+    background-color: rgba(0,0,0,0.7);
+    color: yellow;
+    margin: 1vh;
+    padding: 1vh;
+    border: solid yellow 5px;
+    height: auto;
+}
+
+.clear {
+    display: block;
+    width: 100%;
+    clear: both;
+    /*border: solid white 5px;*/
+}
+
+
+
+.ws-popup-main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    /*background-color: black;*/
+    font-size: 4vh;
+    color: white;
+    /*this should go to the inner one, but css should be fixed*/
+    overflow: auto;
+}
+
+.ws-popup-main-inner {
+    margin: 2vh;
+    /*border: solid white 5px;*/
+    border-radius: 1vh;
+}
+
+.ws-list {
+    background-color: black;
+}
+
+.ws-list-inner {
+}
+
+.ws-list-elems {
+    display: block;
+    margin: 2vh;
+    padding: 1vh;
+    color: white;
+    font-size: 1vw;
+    float: left;
+    width: 29vw;
+    height: 18vh;
+}
+
+
+
+.red {
+    color: red !important;
+}
+
+.green {
+    color: green !important;
+}
+
+.active-button {
+    background-color: forestgreen;
+}
+
+
+
+
+
+
+
+.dbg {
+    /*background-color: rgba(0,0,0,0.6);*/
+    /*background-color: rgba(175, 215, 190, 0.9);*/
+    /*border: solid 1px rgb(80, 91, 129);*/
+    background: none;
+}
+
+
+
+/*
+body {
+    width: 60vw;
+}
+*/
+
+
+#rr_graphcomp img {
+    width: 70vw;
+    margin: 1vh;
+    padding: 1vh;
+    /*border: solid red 2px;*/
+}
+
+.menu {
+    position: absolute;
+    top: 0;
+    display: block;
+    margin: 1vh;
+    padding: 1vh;
+    height: 40vh;
+    width: 98vw;
+}
+
+.ws-list {
+    background-color: rgb(0,77,109);
+    border: solid 2vh rgb(49,182,188);
+    border-radius: 2vh;
+}
+
+.ws-firstrow {
+    width: 99%;
+    height: 15vh;
+    padding: 0.1vh;
+    margin: 0;
+    margin-bottom: 0.2vh;
+    color: rgb(238,238,238);
+    background-color: rgb(49,182,188) !important;
+    /*border: solid rgb(49,182,188) 2vh;
+    border-radius: 2vh;*/
+}
+
+    .ws-firstrow div {
+        position: relative;
+        display: inline-block;
+        float: left;
+        width: 45vw;
+        height: 15vh;
+        margin: 0;
+        padding: 0;
+        font-size: 7vh;
+        font-weight: bold;
+        color: rgb(238,238,238);
+        /*color: #fdd835;*/
+        /*text-align: center !important;
+        vertical-align: middle !important;*/
+    }
+
+        .ws-firstrow div button {
+            position: relative;
+            /*top: 4vh;
+            left: 80vw;*/
+            top: 0;
+            left: 0vw;
+            display: block;
+            font-size: 5vh;
+            width: 11vh;
+            margin: auto;
+        }
+
+            .ws-firstrow div button p {
+                font-size: 10vh;
+                font-weight: bold;
+            }
+
+        .ws-firstrow div button, .ws-list-elem button {
+            /*color: #00a9f4;*/
+            /*color: rgb(238,238,238);*/
+            color: rgb(0,77,109);
+        }
+
+            .ws-firstrow div button:hover, .ws-list-elem button:hover {
+                color: #007ac1;
+                border: solid #fdd835 1vh;
+                border-radius: 1vh;
+                background-color: rgb(238,238,238);
+            }
+
+            .ws-firstrow div button p {
+                font-size: 5vh;
+            }
+
+.ws-list-elems {
+    width: 42vw;
+    height: 32vh;
+    display: inline-block;
+    float: left;
+    background-color: rgb(0,77,109);
+}
+
+.ws-list-elem {
+    display: inline-block;
+    float: left;
+    height: 11vh;
+    width: auto;
+    padding-left: 0.1vh;
+    padding-right: 0.1vh;
+}
+
+    .ws-list-elem button {
+        margin-right: 1vh;
+        font-size: 12vh;
+    }
+
+        .ws-list-elem button p {
+            font-size: 4vh;
+        }
+
+.ws-nametitle {
+    font-weight: bold;
+    font-size: 48px !important;
+    width: 95%;
+    height: auto;
+    margin: 0.1vh;
+    padding: 0.1vh;
+    display: block;
+    top: 0;
+    color: rgb(238, 238, 238);
+    background-color: rgb(0,77,109);
+}
+
+.ws-list-elems {
+    /*background-color: #c6a700;*/
+    /*background-color: rgba(198, 167, 100, 0.3);*/
+    background-color: rgb(238, 238, 238);
+}
+
+.ws-firstrow {
+    background-color: none;
+}
+
+.ws-red-icon, .ws-red-icon button, .ws-red-icon button i {
+    color: red !important;
+}
+
+.ws-green-icon, .ws-green-icon button {
+    color: green !important;
+}
+
+.rr-button {
+    width: 15vh;
+    height: 15vh;
+}
+
+.ws-list-elem {
+    font-size: 11vh;
+}
+
+
+
+/*canvas stuff*/
+.rr-canvas-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    /*top:10vh;*/
+    margin: 2vh;
+    padding: 1vh;
+    width: 100vw;
+    height: 100vh;
+    font-size: 3vh;
+    /*overflow: auto;*/
+}
+
+.rr-canvas-style {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 95vw;
+    height: 45vh;
+    margin: 1vh;
+    margin-top: 3vh;
+    border: solid 4px rgb(0,77,109);
+    background-color: rgb(238,238,238);
+    /*background-color: rgb(49,182,188);*/
+    overflow: auto;
+}
+
+.rr-canvas-attr {
+    position: relative;
+    top: 50vh;
+    left: 0;
+    width: 95vw;
+    height: 45vh;
+    margin: 1vh;
+    border: solid 4px rgb(0,77,109);
+    background-color: rgb(238,238,238);
+    /*background-color: rgb(49,182,188);*/
+    overflow: auto;
+}
+
+    .rr-canvas-attr button, .rr-canvas-style button {
+        color: rgb(238,238,238);
+        font-size: 7vh;
+        font-weight: bold;
+        border: solid 5px rgb(0,77,109);
+        background-color: rgb(49,182,188);
+        border-radius: 1vh;
+        margin: 50px;
+        padding: 1vh;
+        width: 90%;
+        display: block;
+        /*height:10vh;*/
+        /*float: left;*/
+        /*for editor testing*/
+        /*display: inline-block;*/
+    }
+
+.rr-canvas-style button {
+    display: block;
+}
+
+    .rr-canvas-attr button:hover, .rr-canvas-style button:hover {
+        background-color: rgb(0,77,109);
+    }
+
+    .rr-canvas-attr button span, .rr-canvas-style button span {
+        font-size: 3vh;
+    }
+
+
+.mopop-bottom p {
+    color: rgb(0,77,109);
+    font-size: 5vh;
+    font-weight: bold;
+    border: solid 5px rgb(0,77,109);
+    background-color: rgb(49,182,188);
+    border-radius: 1vh;
+    margin: 50px;
+    padding: 1vh;
+    width: 90%;
+}
+
+    .mopop-bottom p span {
+        margin-right: 10px;
+    }
+
+/*
+
+
+
+    ccccc button, .ws-list-elem button {
+        color: white;
+        font-size: 5vh;
+        min-width: 4vh;
+        margin-left: 1vh;
+        padding: 2vh;
+    }
+
+        .ws-list-elems button:hover, .ws-list-elem button:hover {
+            color: cornflowerblue;
+            background-color: lightgray;
+        }
+*/

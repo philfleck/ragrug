@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="givinitup" size="0.084000 0.085016" />
+    <ImageTarget name="timetomove" size="0.084000 0.084000" />
+    <ImageTarget name="redearth" size="0.084000 0.075780" />
+    <ImageTarget name="zooropa" size="0.084000 0.082860" />
+    <ImageTarget name="onehotminute" size="0.084000 0.084000" />
+    <ImageTarget name="nightcap" size="0.084000 0.084000" />
+  </Tracking>
+</QCARConfig>

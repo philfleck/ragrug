@@ -1,0 +1,443 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <!--
+      <script type='text/javascript' src="vz_helper.js"></script>
+      <script type='text/javascript' src="outlet.js"></script>
+    -->
+    <title></title>
+    <style>
+            /* fallback */
+            @font-face {
+                font-family: 'Material Icons';
+                font-style: normal;
+                font-weight: 400;
+                src: url(https://fonts.gstatic.com/s/materialicons/v38/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+            }
+
+            .material-icons {
+                font-family: 'Material Icons';
+                font-weight: normal;
+                font-style: normal;
+                font-size:
+                /*64px;*/
+                /*96px;*/
+                /*48px;*/
+                24px;
+                /* Preferred icon size */
+                line-height: 1;
+                letter-spacing: normal;
+                text-transform: none;
+                display: inline-block;
+                white-space: nowrap;
+                word-wrap: normal;
+                direction: ltr;
+                -webkit-font-feature-settings: 'liga';
+                -webkit-font-smoothing: antialiased;
+            }
+
+            @font-face {
+                font-family: 'Material Icons';
+                font-style: normal;
+                font-weight: 400;
+                /*src: url('MaterialIcons-Regular.ttf');*/
+                /* For IE6-8 */
+                src: local('MaterialIcons-Regular.ttf');
+            }
+
+            .material-icons.orange {
+                color: #ff6c00;
+            }
+
+            .material-icons.red {
+                color: #f44336;
+            }
+
+            .material-icons.green {
+                color: #4dd965;
+            }
+
+            .material-icons.blue {
+                color: #0000FF;
+            }
+
+            .material-icons.sky {
+                color: #309eeb;
+            }
+
+            .material-icons.contrast {
+                color: red;
+            }
+
+            .material-icons.orange:hover {
+                color: #c75400;
+            }
+
+            .material-icons.red:hover {
+                color: #de190a;
+            }
+
+            .material-icons.green:hover {
+                color: #15bc31;
+            }
+
+            .material-icons.blue:hover {
+                color: #0000e6;
+            }
+
+            .material-icons.sky:hover {
+                color: #0a83d8;
+            }
+
+            .material-icons.contrast:hover {
+                color: green;
+            }
+
+
+            .material-icons.md-18 {
+                font-size: 18px;
+            }
+
+            .material-icons.md-24 {
+                font-size: 24px;
+            }
+
+            .material-icons.md-36 {
+                font-size: 36px;
+            }
+
+            .material-icons.md-48 {
+                font-size: 48px;
+            }
+
+            .material-icons.md-64 {
+                font-size: 64px;
+            }
+
+            .material-icons.md-96 {
+                font-size: 96px;
+            }
+
+            .material-icons.md-128 {
+                font-size: 128px;
+            }
+
+            .material-icons.md-256 {
+                font-size: 256px;
+            }
+
+            body {
+                font-family: sans-serif;
+                background-color: none;
+            }
+
+            .material-icons.orange {
+                color: #ff6c00;
+            }
+
+            .material-icons.red {
+                color: #f44336;
+            }
+
+            .material-icons.green {
+                color: #4dd965;
+            }
+
+            .material-icons.blue {
+                color: #0000FF;
+            }
+
+            .material-icons.sky {
+                color: #309eeb;
+            }
+
+            .material-icons.gray {
+                color: darkslategray;
+            }
+
+                .material-icons.gray:hover {
+                    color: forestgreen;
+                }
+
+            .material-icons.orange:hover {
+                color: #c75400;
+            }
+
+            .material-icons.red:hover {
+                color: #de190a;
+            }
+
+            .material-icons.green:hover {
+                color: #15bc31;
+            }
+
+            .material-icons.blue:hover {
+                color: #0000e6;
+            }
+
+            .material-icons.sky:hover {
+                color: #0a83d8;
+            }
+
+
+            .material-icons.md-18 {
+                font-size: 18px;
+            }
+
+            .material-icons.md-24 {
+                font-size: 24px;
+            }
+
+            .material-icons.md-36 {
+                font-size: 36px;
+            }
+
+            .material-icons.md-48 {
+                font-size: 48px;
+            }
+
+            .material-icons.md-64 {
+                font-size: 64px;
+            }
+
+            .material-icons.md-96 {
+                font-size: 96px;
+            }
+
+            .material-icons.md-128 {
+                font-size: 128px;
+            }
+
+            .material-icons.md-256 {
+                font-size: 256px;
+            }
+
+            .material-icons.md-368 {
+                font-size: 368px;
+            }
+
+            .material-icons.md-512 {
+                font-size: 512px;
+            }
+
+            .font-18 {
+                font-size: 24px;
+            }
+
+            .font-24 {
+                font-size: 24px;
+            }
+
+            .font-36 {
+                font-size: 24px;
+            }
+
+            .font-48 {
+                font-size: 48px;
+            }
+
+            .font-64 {
+                font-size: 48px;
+            }
+
+            .bold-font {
+                font-weight: bold;
+            }
+
+            .yellow {
+                color: yellow;
+            }
+
+            .red {
+                color: red;
+            }
+
+            .green {
+                color: green;
+            }
+
+            .blue {
+                color: blue;
+            }
+
+            .pink {
+                color: pink;
+            }
+
+            .yellow-border {
+                border: solid yellow 4px;
+            }
+
+            .green-border {
+                border: solid green 4px;
+            }
+
+            .pink-border {
+                border: solid pink 4px;
+            }
+
+            .blue-border {
+                border: solid blue 4px;
+            }
+
+            .red-border {
+                border: solid red 4px;
+            }
+
+            .bg-setup {
+                background-image: url('rpi.jpg');
+                /*background-size:2100px 1000px;*/
+                background-size: 1300px auto;
+                background-repeat: no-repeat;
+            }
+
+            .marker {
+                position: absolute;
+                top: 0.5cm;
+                left: 11cm;
+                width: 10cm;
+                height: 10cm;
+            }
+
+            .marker-center {
+                position: absolute;
+                top: 5cm;
+                left: 16cm;
+                width: 0.5cm;
+                height: 0.5cm;
+            }
+
+            .device {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                width: 1000px;
+                height: 1000px;
+            }
+
+
+            body {
+                /*background-color: green;*/
+                width: 1000px;
+                height: 1000px;
+            }
+
+            .hidden {
+                display: none;
+            }
+
+            .glyph {
+                /*width:240px;
+        height:240px;*/
+                /*display:inline-block;*/
+                float: left;
+                display: inline-block;
+                margin: 0 0 0 0;
+                padding: 0 0 0 0;
+            }
+
+            .details {
+                /*display: block;*/
+                display: inline-block;
+                border: solid red 2px;
+                float: left;
+                width: 600px;
+                heigth: 600px;
+                margin: 30px 0 0 20px;
+                background-color: gainsboro;
+                /*border-radius: 5px;*/
+            }
+
+            .topbar {
+                width: 97%;
+                display: block;
+                float: left;
+                clear: both;
+                border-bottom: solid silver 2px;
+                padding: -5px 5px 5px;
+                margin: 10px;
+            }
+
+                .topbar span {
+                    float: right;
+                    color: red;
+                    margin-top: -5px;
+                }
+
+            .bar {
+                width: 95%;
+                display: block;
+                float: left;
+                padding: 5px 5px 5px;
+                margin: 5px 10px 5px 10px;
+                background-color: lightgray;
+                border: solid silver 1px;
+            }
+
+                .bar .left {
+                    width: 30%;
+                    float: left;
+                }
+
+                .bar .right {
+                    width: 65%;
+                    float: right;
+                    margin-left: 10px;
+                }
+
+            .clear {
+                clear: both;
+            }
+
+            .arrow-line {
+                border-top: solid silver 2px;
+                border-left: solid silver 2px;
+                float: left;
+                width: 35px;
+                height: 35px;
+                transform: translate(-30px, 5px) rotate(-45deg);
+                background: gainsboro;
+            }
+    </style>
+</head>
+
+<body class="">
+
+
+    <!-- <div class="yellow-border marker">marker</div> -->
+    <!-- <div id="idMarkerOrigin" class="marker-center yellow-border">X</div> -->
+
+    <div class="glyph">
+        <a href="#" onClick="VZHelper_StopHref(event);VZHelper_ToggleWindow('idDetails');">
+            <i class="material-icons md-256 contrast red">&#xe001;</i>
+        </a>
+    </div>
+
+
+    <div class="details red-border" id="idDetails">
+        <div class="topbar">
+
+            <span class="bold-font font-64 red">Error CB139H9</span>
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="bar font-48 red bold-font">
+            Circuit 9 NOT reachable! Check breaker!
+            <div class="">
+
+            </div>
+
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="clear"></div>
+    </div>
+
+</body>
+
+</html>

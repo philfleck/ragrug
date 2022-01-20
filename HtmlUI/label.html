@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" href="./main.css" />
+    <script type='text/javascript' src="./jQuery"></script>
+    <script type='text/javascript' src="./json2html.js"></script>
+    <script type='text/javascript' src="./runtime.js"></script>
+    <script type='text/javascript' src="./main.js"></script>
+    <script type='text/javascript' src="./label.js"></script>
+    <script type='text/javascript' src="./cnr.js"></script>
+
+
+
+    <title></title>
+    <style>
+        .label-info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            /*border: solid white 4px; */
+            border-radius: 2vh;
+            width: 60vw;
+        }
+
+        .bigtext {
+            float: left;
+            display: inline-block;
+            font-size: 3vw;
+            width: 100%;
+            margin: 0.5vh;
+            padding: 0.5vh;
+        }
+
+        #mqtt_cont, #mqtt_cmd {
+            font-size: 5vw;
+            display: inline-block;
+            float: left;
+        }
+
+            #mqtt_cont:hover {
+            }
+
+
+        #mqtt_cmd, #mqtt_cont {
+            width: 100%;
+            min-height: 15vh;
+            margin: 0.2vh;
+            padding: 0.1vh;
+        }
+
+            #mqtt_cmd div, #mqtt_cont div, #mqtt_cont button {
+                border: solid 1vh rgb(49,182,188);
+                background-color: rgb(0,77,109);
+                border-radius: 1vh;
+                margin: 0.2vh;
+                padding: 0.1vh;
+                width: auto;
+                display: inline-block;
+                float: left;
+            }
+
+
+                #mqtt_cont div:hover, #mqtt_cmd div:hover, #mqtt_cont button:hover {
+                    border: solid 1vh rgb(238, 238, 238);
+                    background-color: deepskyblue;
+                }
+
+
+        .pin {
+            /*font-size: 5vh;*/
+            background-color: rgb(49,182,188);
+            /*color: black;*/
+            display: block;
+            float: right;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+            .pin:hover {
+                background-color: rgb(0,77,109);
+            }
+
+            .pin button {
+                width: auto;
+                font-size: 6vh;
+                padding: 1vh;
+                color: rgb(238,238,238);
+            }
+
+                .pin button:hover {
+                }
+
+
+
+
+
+        .pin2 {
+            top: 23vh;
+        }
+
+        .pin3 {
+            top: 46vh;
+        }
+
+        /*redoing design*/
+        .label-info {
+            display: inline-block;
+            border: solid rgb(49,182,188) 2vh;
+            border-radius: 2vh;
+            margin: 0.1vh;
+            padding: 0;
+            width: 80%;
+            color: rgb(238,238,238);
+            background-color: rgb(0,77,109);
+        }
+
+        .titlebar {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 99%;
+            height: 8vh;
+            margin: auto;
+            margin-bottom: 1vh;
+            padding: 1vh;
+            font-size: 7vh;
+            font-weight: bold;
+            color: rgb(238,238,238);
+            background-color: rgb(49,182,188);
+            display: inline-block;
+        }
+
+        .mqtt-cmd {
+            display: inline-block;
+            color: rgb(238,238,238);
+        }
+
+        .mqtt-cont, .mqtt-cont button {
+            color: rgb(238,238,238);
+            display: inline-block;
+            font-size: 6vh;
+            font-weight: bold;
+        }
+
+            .mqtt-cont div span, .mqtt-cont button span {
+                font-size: 4vh;
+                font-weight: bold;
+            }
+
+        .bigtext {
+            color: rgb(238,238,238);
+            font-size: 2vh;
+            height: auto;
+            padding: 0.1vh;
+            width: 99%;
+        }
+
+        .label-img-cont {
+            position: relative;
+            width: 99%;
+            height: auto;
+            display: inline-block;
+        }
+
+            .label-img-cont img {
+                margin: 1vh;
+                position: relative;
+                width: 50% !important;
+            }
+
+                .label-img-cont img:hover {
+                    /*width: 100%;*/
+                    border: solid rgb(238,238,238) 2px;
+                }
+    </style>
+</head>
+
+<body class="">
+    <!--
+    <div class="pin">
+        <button id="btn_pin"><i class="material-icons md-l">&#xe06a;</i></button>
+    </div>
+
+    <div class="pin pin2">
+        <button id="btn_explode"><i class="material-icons md-l">&#xe56b;</i></button>
+    </div>
+
+    <div class="pin pin3">
+        <button id="btn_3d"><i class="material-icons md-l">&#xe84d;</i></button>
+    </div>
+    -->
+
+    <div class="label-info" id="label-wrap">
+        <div class="titlebar" id="titlebar">
+            Loading ...
+        </div>
+        <!--<div class="bigtext" id="mstatus">Status1</div>-->
+        <div class="mqtt-cmd" id="mqtt_cmd">
+            <!--
+            <div class='rr-customval' onclick=''>CMD1</div>
+            <div class='rr-customval' onclick=''>CMD2</div>
+            <div class='rr-customval' onclick=''>CMD3</div>
+            -->
+        </div>
+        <div class="mqtt-cont" id="mqtt_cont">
+        </div>
+        <div class="label-img-cont" id="img_cont">
+            <!--
+            <img id="vis_img" src="https://www.chip.de/ii/5/6/7/6/2/8/4/8/43dff6dc96b32060.jpeg" />
+            -->
+        </div>
+        <!-- <div class="label-img-cont" id="img_cont"><img id="vis_img" src="https://www.chip.de/ii/5/6/7/6/2/8/4/8/43dff6dc96b32060.jpeg"/></div> -->
+        <!-- <div id="img_cont"><img id="vis_img" src="http://192.168.1.168:3000/render/d-solo/H6CTNOUZz/heating?orgId=1&refresh=30s&from=1585542623524&to=1585564223524&panelId=2&width=1000&height=500&tz=Europe%2FVienna" /></img></div> -->
+
+    </div>
+
+
+    <script>
+        $("#mqtt_cont").hide();
+        $("#img_cont").hide();
+        $("#mqtt_cmd").hide();
+        //Label_SetInfo("null", "null");
+        RT.Web.AppendFunctionOnClick("#btn_pin", "Label_PinToMesh(event);");
+        RT.Web.AppendFunctionOnClick("#btn_explode", "Label_ToggleExplosion(event);")
+        RT.Web.AppendFunctionOnClick("#btn_3d", "Label_Show3dPart();")
+    </script>
+</body>
+
+</html>

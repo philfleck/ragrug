@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" href="./main.css" />
+    <!--<script type='text/javascript' src="./jQuery"></script>-->
+    <!--<script type='text/javascript' src="./json2html.js"></script>-->
+    <script type='text/javascript' src="./runtime.js"></script>
+    <!--<script type='text/javascript' src="./main.js"></script>-->
+    <!--<script type='text/javascript' src="./mopop.js"></script>-->
+    <!--<script type='text/javascript' src="./cnr.js"></script>-->
+
+    <title>RR0-Loader</title>
+
+</head>
+
+<body class="">
+    <div id="container" style="border:solid green 4px; width:250px; height:50px;">
+        <div id="inner" style="background-color:red;width:1px;height:50px;"></div>
+    </div>
+
+    <script>
+        var curw = 0;
+        var step = 10;
+
+        function grow() {
+            RT.Web.SetTiimeout(70, growStep);
+        }
+
+        function growStep() {
+            if (curw < (250)) {
+                curw += step;
+                document.getElementById("inner").style.width = "" + curw + "px";
+                grow();
+            }
+        }
+
+        grow();
+    </script>
+</body>
+</html>

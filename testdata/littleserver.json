@@ -1,0 +1,175 @@
+{
+  "modelname": "rockpro64",
+  "devicename": "littleserver",
+  "registered": false,
+  "assetname": "rockpro64.ab",
+  "commonname": "rockpro64",
+  "trackingdb": [
+    "rockpro64_clean_centered_scaled.xml",
+    "rockpro64_clean_centered_scaled.dat"
+  ],
+  "locationkey": "NETGEAR81-5G",
+  "locationpath": "inffeld16/2nd/id2068",
+  "scale": 1,
+  "id": "NETGEAR81-5G-littleserver",
+  "parts": [
+    {
+      "name": "MAIN-PCBA",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "parent": "root",
+      "active": false
+    },
+    {
+      "name": "HDMI_2",
+      "position": [
+        0.0593402295,
+        0.00209352895,
+        0.0061
+      ],
+      "parent": "root",
+      "active": true
+    },
+    {
+      "name": "DC-BIG",
+      "position": [
+        0.0655902295,
+        -0.002429655,
+        0.0035
+      ],
+      "parent": "root",
+      "active": true
+    },
+    {
+      "name": "RJ45",
+      "position": [
+        0.0655902295,
+        0.0300914,
+        0
+      ],
+      "parent": "root",
+      "active": true
+    },
+    {
+      "name": "PRT0003",
+      "position": [
+        0.0634446115,
+        -0.0026553922,
+        0
+      ],
+      "parent": "root",
+      "active": false
+    },
+    {
+      "name": "USB",
+      "position": [
+        -0.0654446115,
+        0.0053275865,
+        0.008325
+      ],
+      "parent": "root",
+      "active": true
+    },
+    {
+      "name": "TYPC",
+      "position": [
+        -0.0654446115,
+        0.00226461705,
+        0.0015
+      ],
+      "parent": "root",
+      "active": true
+    },
+    {
+      "name": "JACK",
+      "position": [
+        -0.01313435000652,
+        -0.03510729550002,
+        -0.0006666666666665
+      ],
+      "parent": "root",
+      "active": false
+    },
+    {
+      "name": "MICRO-SD-HOUSING__1",
+      "position": [
+        0.01906515449945,
+        0.005587371250461,
+        0.007162628749539
+      ],
+      "parent": "root",
+      "active": false
+    },
+    {
+      "name": "MICRO-SD-CARD__1",
+      "position": [
+        0.02006515449945,
+        0.008487371250461,
+        0.007812628749539
+      ],
+      "parent": "root",
+      "active": false
+    },
+    {
+      "name": "MINI_SD_ASM_1_ASM",
+      "position": [
+        0.02190729900055,
+        -0.03412867824954,
+        0.005962628749539
+      ],
+      "parent": "root",
+      "active": false
+    },
+    {
+      "name": "IR",
+      "position": [
+        -0.0617586045,
+        -0.0166922955,
+        0.00158
+      ],
+      "parent": "root",
+      "active": true
+    },
+    {
+      "name": "TYPC001",
+      "position": [
+        -0.0654446115,
+        0.0226461705,
+        0
+      ],
+      "parent": "root",
+      "active": false
+    },
+    {
+      "name": "MAIN-PCB_ASM",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "parent": "root",
+      "active": false
+    }
+  ],
+  "transform": {
+    "position": [
+      0.8081554174423218,
+      -0.3749582767486572,
+      1.3123224973678589
+    ],
+    "rotation": [
+      0.359118789434433,
+      0.5881693363189697,
+      0.6280381679534912,
+      -0.3614674210548401
+    ],
+    "scale": [
+      0.9999998807907104,
+      1,
+      1
+    ]
+  }
+}
