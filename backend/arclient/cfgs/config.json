@@ -1,8 +1,0 @@
-{ 
-  "apiurl":"http://129.69.207.165:1880", 
-  "uiurl":"http://129.69.207.165:9999",
-  "grafana_dashboard_url":"http://129.69.207.165:3000/api/dashboards/uid/Yq3Gat4Gk",
-  "mqttbrokerip":"129.69.207.165",
-  "mqttbrokerport":"1883"
-  
-}

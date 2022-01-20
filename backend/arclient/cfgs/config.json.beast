@@ -1,5 +1,0 @@
-{ 
-  "apiurl":"http://10.0.0.2:1880", 
-  "uiurl":"http://10.0.0.2:8080",
-  "grafana_dashboard_url":"http://10.0.0.2:3000/api/dashboards/uid/Yq3Gat4Gk"
-}
