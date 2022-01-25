@@ -1,0 +1,5 @@
+<linker>
+  <assembly fullname="Microsoft.Solver.Foundation">
+    <type fullname="Microsoft.SolverFoundation.Services" preserve="all" />
+  </assembly>
+</linker>

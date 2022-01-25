@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARInfo>
+<TargetSet version="20.0" toolVersion="9.3.3">
+<ModelTarget name="2cds272001_s202m" targetId="7e49c0ea03664ef184737fd4a966225f" version="11.1" toolVersion="9.3.3" bbox="-0.044000 -0.063300 -0.026100 0.044000 0.010526 0.008700" previewImage="7e49c0ea03664ef184737fd4a966225f_preview.jpg"/>
+<ModelTarget name="Murcielago assembly" targetId="71e974c3d4824f098b32db96512c52e5" version="11.1" toolVersion="9.3.3" bbox="-3.046000 1.658250 1.142864 -0.829999 2.935945 5.721047" previewImage="71e974c3d4824f098b32db96512c52e5_preview.jpg"/>
+<ModelTarget name="rockpro64_colored" targetId="e9e088aae7bf4cabb69612922ed707c0" version="11.1" toolVersion="9.3.3" bbox="-0.066759 -0.042616 -0.003050 0.065590 0.039716 0.018800" previewImage="e9e088aae7bf4cabb69612922ed707c0_preview.jpg"/>
+
+</TargetSet>
+
+<Assembly name="2cds272001_s202ms_assembly" assemblyId="cfff6025e3bc4d56b85f89a46ccdac96">
+<Part name="2cds272001_s202m" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="-0.00291363 -0.0198105 0.120682" rotation="AD: 0.9999767154260403 0.04129624414584524 -0.17242481461311537 206.539" image="2cds272001_s202m_viewpoint_0000.png" trained="yes">
+
+</EntryPoint>
+
+</Assembly>
+<Assembly name="Murcielago assemblys_assembly" assemblyId="8208421cf4c4423eb59fa3be0390416d">
+<Part name="Murcielago assembly" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="murci1" translation="0.739239 1.24706 9.52134" rotation="AD: 0.999943724042936 0.03726148338891596 -0.2994850765022617 193.585" image="Murcielago assembly_murci1.png" trained="yes">
+
+</EntryPoint>
+
+</Assembly>
+<Assembly name="rockpro64_coloreds_assembly" assemblyId="76e178c6cef34edc88671afdaf032680">
+<Part name="rockpro64_colored" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="0.000562572 0.00662676 0.180448" rotation="AD: -0.019278075122610195 2.5940328494399334 -1.0835653268957959 180.328" image="rockpro64_colored_viewpoint_0000.png" trained="yes">
+
+</EntryPoint>
+
+</Assembly>
+<ModelTargetDatabase mtDBid="bde3528dfaad40d9ad0dfcf7c96a9a6e" name="rr" toolVersion="13.0" version="13.0">
+    <RecognitionResult assemblyId="76e178c6cef34edc88671afdaf032680" assemblyName="rockpro64_colored" entryPoint="viewpoint_0000" />
+    <RecognitionResult assemblyId="8208421cf4c4423eb59fa3be0390416d" assemblyName="Murcielago assembly" entryPoint="murci1" />
+    <RecognitionResult assemblyId="cfff6025e3bc4d56b85f89a46ccdac96" assemblyName="2cds272001_s202m" entryPoint="viewpoint_0000" />
+</ModelTargetDatabase>
+
+</QCARInfo>

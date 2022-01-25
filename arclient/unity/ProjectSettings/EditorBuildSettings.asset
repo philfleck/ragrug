@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/SampleResources/Scenes/0-Menu.unity
+    guid: 72a81fd0bdedaf0448e6c17d1e8fcb86
+  - enabled: 0
+    path: Assets/SampleResources/Scenes/1-ImageTargets.unity
+    guid: 03ddc4184641b534487cecd6dab620df
+  - enabled: 0
+    path: Assets/SampleResources/Scenes/1-VuMarks.unity
+    guid: d9b53b25a285640cf8ac170a80603e34
+  - enabled: 0
+    path: Assets/SampleResources/Scenes/1-ModelTargets.unity
+    guid: 530386685ba085242832bd5cc78d7222
+  - enabled: 0
+    path: Assets/SampleResources/Scenes/mytest.unity
+    guid: 183ae66e74f78944c81fba368dcdbc6b
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  m_configObjects: {}
