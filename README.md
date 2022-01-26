@@ -1,7 +1,10 @@
-# About
+# RR - RagRug - A Toolkit for Situated Analytics
+
+[![RagRug examples](https://img.youtube.com/vi/mFxSdvQhSVU/0.jpg)](https://www.youtube.com/watch?v=mFxSdvQhSVU)
 
 ### Docu
 [Navigation](HtmlUI/docu/navigation.md)
+
 [Docu](HtmlUI/docu/index.md)
 
 Ones deploy Docu can be accessed under:
