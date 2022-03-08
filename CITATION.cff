@@ -12,7 +12,6 @@ authors:
 - family-names: "Schmalstieg"
   given-names: "Dieter"
 title: "RagRug: A Toolkit for Situated Analytics"
-journal: "IEEE Transactions on Visualization and Computer Graphics"
 version: 2.0.4
 doi: 10.1109/TVCG.2022.3157058
 date-released: 2022-03-07
