@@ -13,7 +13,18 @@ Ones deploy Docu can be accessed under:
 
 http://localhost:9999/docu/mdwiki-slim.html#!index.md
 
-
+If you use this software, please cite it as below.
+```
+@ARTICLE{9729627,
+  author={Fleck, Philipp and Sousa Calepso, Aimee and Hubenschmid, Sebastian and Sedlmair, Michael and Schmalstieg, Dieter},
+  journal={IEEE Transactions on Visualization and Computer Graphics}, 
+  title={RagRug: A Toolkit for Situated Analytics}, 
+  year={2022},
+  volume={},
+  number={},
+  pages={1-1},
+  doi={10.1109/TVCG.2022.3157058}}
+```
 
 ### Backend
 The backend consist of several loosely couploed components: NodeRed, MQTT-Broker, CouchDb, InfluxDB, Postgres, Grafana and CAD-Parsers (FreeCad and Unity). Except the CAD-Parsers, all entities run as docker container and store their persistant data on a mount on the Host. The current version, can only run the CAD-Parsers and NodeRed from teh same Host.
