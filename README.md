@@ -1,3 +1,6 @@
+# Preprint
+https://ieeexplore.ieee.org/document/9729627
+
 # <img src="HtmlUI/docu/img/ragruglogo.png" width="24"> RagRug - A Toolkit for Situated Analytics
 RagRug is an open-source toolkit for visual analytics.
 
