@@ -1,20 +1,13 @@
-# Preprint
-https://ieeexplore.ieee.org/document/9729627
-
 # <img src="HtmlUI/docu/img/ragruglogo.png" width="24"> RagRug - A Toolkit for Situated Analytics
 RagRug is an open-source toolkit for visual analytics.
 
-# Examples
-[![RagRug examples](https://img.youtube.com/vi/mFxSdvQhSVU/0.jpg)](https://www.youtube.com/watch?v=mFxSdvQhSVU)
+## About
 
-### Docu
-[Navigation](HtmlUI/docu/navigation.md)
+### Honorary Award Open Source tools, IEEE VR Workshop 2022
+[Open Access Tools and Libraries for Virtual Reality](https://openvrlab.github.io/)
 
-[Docu](HtmlUI/docu/index.md)
-
-Ones deploy Docu can be accessed under:
-
-http://localhost:9999/docu/mdwiki-slim.html#!index.md
+### Publication
+[Preprint](https://ieeexplore.ieee.org/document/9729627)
 
 If you use this software, please cite it as below.
 ```
@@ -28,6 +21,27 @@ If you use this software, please cite it as below.
   pages={1-1},
   doi={10.1109/TVCG.2022.3157058}}
 ```
+### Slides
+[Tutorial slides](RagRug_VR22_Tutorial_20220314.pdf)
+
+### Youtube
+
+- [philfleck's channel](https://www.youtube.com/watch?v=mFxSdvQhSVU)
+- [dieter schmalstiegs's channel](https://www.youtube.com/channel/UCCBRxUZzvQhGyyQJM2SYAXg)
+
+
+
+## Examples
+[![RagRug examples](https://img.youtube.com/vi/mFxSdvQhSVU/0.jpg)](https://www.youtube.com/watch?v=mFxSdvQhSVU)
+
+### Docu
+[Navigation](HtmlUI/docu/navigation.md)
+
+[Docu](HtmlUI/docu/index.md)
+
+Ones deploy Docu can be accessed under:
+
+http://localhost:9999/docu/mdwiki-slim.html#!index.md
 
 ### Backend
 The backend consist of several loosely couploed components: NodeRed, MQTT-Broker, CouchDb, InfluxDB, Postgres, Grafana and CAD-Parsers (FreeCad and Unity). Except the CAD-Parsers, all entities run as docker container and store their persistant data on a mount on the Host. The current version, can only run the CAD-Parsers and NodeRed from teh same Host.
