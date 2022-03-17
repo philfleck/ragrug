@@ -33,9 +33,12 @@ If you use this software, please cite it as below.
 - [philfleck's channel](https://www.youtube.com/watch?v=mFxSdvQhSVU)
 - [dieter schmalstiegs's channel](https://www.youtube.com/channel/UCCBRxUZzvQhGyyQJM2SYAXg)
 
-### Curated list of examples
+### Quickstart
 
 - [NodeRed Flow Examples](nodered_flow_examples/README.md)
+- [ARClient configurations](arclient/cfgs)
+- [ARClient pre-builds](arclient/builds)
+- [ARClient 1.2.124](https://files.icg.tugraz.at/f/ccd54365a08a4f089744/?dl=1)
 
 
 ## Documentation
