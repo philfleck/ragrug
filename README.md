@@ -5,8 +5,9 @@ RagRug is an open-source toolkit for visual analytics.
 
 ## About
 
-### Honorary Award Open Source tools, IEEE VR Workshop 2022
-[Open Access Tools and Libraries for Virtual Reality](https://openvrlab.github.io/)
+### Awards
+
+- Honorary Award Open Source tools, IEEE VR Workshop 2022 ([Open Access Tools and Libraries for Virtual Reality](https://openvrlab.github.io/))
 
 ### Publication
 
