@@ -1,6 +1,8 @@
 # <img src="HtmlUI/docu/img/ragruglogo.png" width="24"> RagRug - A Toolkit for Situated Analytics
 RagRug is an open-source toolkit for visual analytics.
 
+[![RagRug examples](https://img.youtube.com/vi/mFxSdvQhSVU/0.jpg)](https://www.youtube.com/watch?v=mFxSdvQhSVU)
+
 ## About
 
 ### Honorary Award Open Source tools, IEEE VR Workshop 2022
@@ -32,20 +34,17 @@ If you use this software, please cite it as below.
 - [dieter schmalstiegs's channel](https://www.youtube.com/channel/UCCBRxUZzvQhGyyQJM2SYAXg)
 
 
-
-## Examples
-[![RagRug examples](https://img.youtube.com/vi/mFxSdvQhSVU/0.jpg)](https://www.youtube.com/watch?v=mFxSdvQhSVU)
-
-### Docu
+## Documentation
 [Navigation](HtmlUI/docu/navigation.md)
 
 [Docu](HtmlUI/docu/index.md)
 
+### Online documentation running on the Hub
 Ones deploy Docu can be accessed under:
 
 http://localhost:9999/docu/mdwiki-slim.html#!index.md
 
-### Backend
+## Backend
 The backend consist of several loosely couploed components: NodeRed, MQTT-Broker, CouchDb, InfluxDB, Postgres, Grafana and CAD-Parsers (FreeCad and Unity). Except the CAD-Parsers, all entities run as docker container and store their persistant data on a mount on the Host. The current version, can only run the CAD-Parsers and NodeRed from teh same Host.
 
 Due to its complexity in what can happen and is happening, action and data wise, we want to ellaborate on some core concepts:
@@ -58,24 +57,6 @@ telemetry/bulding/floor/room/device/part/skill
 To further distinguish we add the prefix `telemetetry` to all measured and reported data. Due to the topic based concept of MQTT, every client can directly consume messages publish. By either subscribing to a specific topic or to an upper level one e.g. at device level, to receive all measurements of one device: `telemetry/building/floor/room/device/#`. `#` and `+` are MQTT [Wildcards](https://www.hivemq.com/blog/mqtt-essentials-part-5-mqtt-topics-best-practices/).
 
 NodeRed acts as a core manager and data director. In some case it acts as an relay.
-
-### ARClient
-
-# TODOs
-[x] add setup file
-
-[x] setup install for node
-
-[x] add to docker build
-
-[x] fix grafana
-
-[] add demo data, and demo tracking db, an assets
-
-# Links
-
-- [sample data couch-db](http://pleasefixme)
-- [tracking db](trackingdb link)
 
 
 # Setup procedure
