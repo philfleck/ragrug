@@ -9,7 +9,7 @@ RagRug is an open-source toolkit for visual analytics.
 ### Publication
 
 - [Preprint](https://ieeexplore.ieee.org/document/9729627)
-- [Author's Version](https://files.icg.tugraz.at/f/9fad7480101647a5bca7/?dl=1)
+- [Author's Version](https://files.icg.tugraz.at/f/9fad7480101647a5bca7)
 
 If you use this software, please cite it as below.
 ```
