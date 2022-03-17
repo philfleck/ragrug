@@ -33,11 +33,19 @@ If you use this software, please cite it as below.
 - [philfleck's channel](https://www.youtube.com/watch?v=mFxSdvQhSVU)
 - [dieter schmalstiegs's channel](https://www.youtube.com/channel/UCCBRxUZzvQhGyyQJM2SYAXg)
 
+### Curated list of examples
+
+- [NodeRed Flow Examples](nodered_flow_examples/README.md)
+
 
 ## Documentation
-[Navigation](HtmlUI/docu/navigation.md)
 
-[Docu](HtmlUI/docu/index.md)
+- [Doce Navigation](HtmlUI/docu/navigation.md)
+- [Docu Main](HtmlUI/docu/index.md)
+- [Tutorial: Smart fridge](HtmlUI/docu/smartfridge-tutorial.md)
+- [Tutorial: Device registered user interfaces](HtmlUI/docu/device-registered-interfaces.md)
+- [Tutorial: Add Vuforia tracking](HtmlUI/docu/add-vuforia-tracking.md)
+- [Tutorial: Setup Location](HtmlUI/docu/setup-location.md)
 
 ### Online documentation running on the Hub
 Ones deploy Docu can be accessed under:
