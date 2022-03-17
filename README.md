@@ -4,7 +4,10 @@ RagRug is an open-source toolkit for visual analytics.
 
 
 [![RagRug examples](https://img.youtube.com/vi/mFxSdvQhSVU/0.jpg)](https://www.youtube.com/watch?v=mFxSdvQhSVU)
-<img src="HtmlUI/docu/img/ragruglogo.png" width="364">
+<img src="HtmlUI/docu/img/ragruglogo.png" width="256">
+
+<img style="float:left" src="HtmlUI/docu/img/ragruglogo.png" width="128">
+[<img src="https://img.youtube.com/vi/mFxSdvQhSVU/0.jpg" width="128">](https://www.youtube.com/watch?v=mFxSdvQhSVU)
 
 ## About
 
