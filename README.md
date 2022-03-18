@@ -1,6 +1,6 @@
 # RagRug - A Toolkit for Situated Analytics <img src="HtmlUI/docu/img/ragruglogo.png" align="right" alt="RagRugLogo" width="150" height="150">
 
-RagRug is an open-source toolkit for visual analytics.
+RagRug is an open-source toolkit for visual analytics. In particular it is an distributed real-time system based on open-source software. Our Backend, the Hub, uses NodeRed, MQTT (Mosquito), InfluxDb, Postgres, Grafana and can easily be extended to any needs. The ARClient is based on Unity, PowerUI, MRTK and can therefore run and interpret JS code at runtime.  
 
 
 [![RagRug examples](https://img.youtube.com/vi/mFxSdvQhSVU/0.jpg)](https://www.youtube.com/watch?v=mFxSdvQhSVU)
