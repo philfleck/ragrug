@@ -1,4 +1,4 @@
-# <img src="HtmlUI/docu/img/ragruglogo.png" width="64"> RagRug - A Toolkit for Situated Analytics
+# RagRug - A Toolkit for Situated Analytics <img src="HtmlUI/docu/img/ragruglogo.png" align="right" alt="RagRugLogo" width="150" height="150">
 
 RagRug is an open-source toolkit for visual analytics.
 
