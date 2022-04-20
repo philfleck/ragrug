@@ -35,7 +35,7 @@ namespace IATK
             return dataArray;
         }
 
-        public bool shiftdata = false;
+        public bool shiftdata = true;
 
         /// <summary>
         /// Creates a dimension that can later have data set to it
@@ -67,6 +67,17 @@ namespace IATK
                 return true;
             }
             return false;
+        }
+
+        public bool SetDimensionSizeLimit(int newLimit)
+        {
+            if (dimensionPointers.Count > 0) // Do not allow resize if data is already present
+            {
+                return false;
+            }
+
+            dimensionSizeLimit = newLimit;
+            return true;
         }
 
 
@@ -477,6 +488,24 @@ namespace IATK
                 }
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Gets the dimension data at the specified index. Named function to be called from JS.
+        /// </summary>
+        /// <param name="index">Index of dimension</param>
+        public DimensionData GetDataByIndex(int index)
+        {
+            return this[index];
+        }
+
+        /// <summary>
+        /// Gets the dimension data with the specified identifier. Named function to be called from JS.
+        /// </summary>
+        /// <param name="identifier">Identifier.</param>
+        public DimensionData GetDataByIdentifier(string identifier)
+        {
+            return this[identifier];
         }
 
         /// <summary>

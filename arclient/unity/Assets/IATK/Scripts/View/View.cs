@@ -305,6 +305,15 @@ namespace IATK
         }
 
         /// <summary>
+        /// Updates linking indices
+        /// </summary>
+        /// <param name="dataY"></param>
+        public void UpdateIndices(int[] data)
+        {
+            bigMesh.updateIndices(data);
+	}
+
+        /// <summary>
         /// Tweens - animates the vertices
         /// </summary>
         public void TweenPosition()

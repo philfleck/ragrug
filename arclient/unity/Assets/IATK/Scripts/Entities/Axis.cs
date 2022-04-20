@@ -146,7 +146,10 @@ namespace IATK
                     attributeLabel.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
                     attributeLabel.GetComponent<TextContainer>().anchorPosition = TextContainerAnchors.Custom;
                     attributeLabel.GetComponent<TextContainer>().pivot = new Vector2(0.5f, 0.5f);
-                    UpdateLength(visualisationReference.width);
+                    if(visualisationReference != null)
+                    {
+                        UpdateLength(visualisationReference.width);
+                    }
                     break;
                     
                 case 2:
@@ -155,7 +158,10 @@ namespace IATK
                     SetXLocalPosition(maxNormaliserObject, -maxNormaliserObject.transform.localPosition.x);
                     minNormaliserObject.localEulerAngles = new Vector3(90, 90, 0);
                     maxNormaliserObject.localEulerAngles = new Vector3(90, 90, 0);
-                    UpdateLength(visualisationReference.height);
+                    if(visualisationReference != null)
+                    {
+                        UpdateLength(visualisationReference.height);
+                    }
                     break;
                     
                 case 3:
@@ -164,7 +170,10 @@ namespace IATK
                     SetXLocalPosition(maxNormaliserObject, -maxNormaliserObject.transform.localPosition.x);
                     minNormaliserObject.localEulerAngles = new Vector3(90, 90, 0);
                     maxNormaliserObject.localEulerAngles = new Vector3(90, 90, 0);
-                    UpdateLength(visualisationReference.depth);
+                    if(visualisationReference != null)
+                    {
+                        UpdateLength(visualisationReference.depth);
+                    }
                     break;
             }
         }

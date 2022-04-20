@@ -39,7 +39,7 @@ namespace RR
         public const string RR_DEVICE = "WSA";
 #elif UNITY_ANDROID
         public const string RR_DEVICE = "ANDROID";
-#elif UNITY_IOS
+#elif UNITY_IOS || UNITY_IPHONE
         public const string RR_DEVICE = "IOS";
 #else
         public const string RR_DEVICE = "NOTSET";
@@ -89,6 +89,7 @@ namespace RR
         }
 
         public List<GameObject> visPrefabs = new List<GameObject>();
+        private GameObject configCanvas = null;
 
         private AudioSource audioSource = null;
         public AudioClip clickSoundClip;
@@ -254,9 +255,55 @@ namespace RR
             return ret;
         }
 
+        public void LoadConfigFromInputField(UnityEngine.UI.InputField inputField)
+        {
+            if(inputField != null)
+            {
+                //var uri = inputField.textComponent.text;
+                var uri = inputField.text;
+                if (uri.Length > 0)
+                {
+                    LoadConfigFromUrl(uri);
+                }
+            }
+        }
+
+        public Jint.Native.JsValue ConfigDownloadResponse(Jint.Native.JsValue a, Jint.Native.JsValue[] b)
+        {
+            return null;
+        }
+        public void LoadConfigFromUrl(string uri)
+        {
+            //System.Func<Jint.Native.JsValue, Jint.Native.JsValue[], Jint.Native.JsValue>
+            Debug.Log("Trying to load config.json from: " + uri);
+            string[] headers = { "content-type", "application/x-www-form-urlencoded" };
+            //Vizario.VApp.jWeb.DownloadFile("GET", uri, headers, "config.json", false, ConfigDownloadResponse);
+            Vizario.VApp.jWeb.DownloadFile("GET", uri, headers, "config.json", false, null);
+            StartCoroutine(AfterConfigDownloadInit());
+        }
+
+        IEnumerator AfterConfigDownloadInit()
+        {
+            yield return new WaitForSeconds(1);
+            InitUi();
+        }
+
         public void InitUi()
         {
             var urlPrefix = GetUrlPrefix();
+
+            if(urlPrefix == "")
+            {
+                Debug.Log("InitUi could NOT LOAD config.json!");
+                return;
+            }
+
+            if (configCanvas == null)
+            {
+                configCanvas = GameObject.Find("ConfigCanvas");
+            }
+
+            configCanvas.SetActive(false);
 
             Debug.Log("InitUi urlPrefix=" + urlPrefix);
             var g = Vizario.ObjectKeeper.GetRTInstance().CreateOrGet(Statics.UI_GO_NAME);
@@ -1021,6 +1068,24 @@ namespace RR
             }
             //Resources.UnloadUnusedAssets();
             //GC.Collect();
+        }
+
+        public static bool IsNull(UnityEngine.Object obj)
+        {
+            try
+            {
+                return obj == null;
+            }
+            catch (MissingReferenceException)
+            {
+                return true;
+            }
+            catch (Exception err)
+            {
+                Debug.LogError("IsNull ERROR => " + err);
+            }
+
+            return true;
         }
 
         void VufoOnTargetFound()

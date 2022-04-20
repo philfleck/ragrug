@@ -15,8 +15,10 @@ namespace Microsoft.MixedReality.Toolkit.UI
         public bool ShowHighlight
         {
             set
-            {
-                lineRenderer.enabled = value;
+            {   if (lineRenderer != null)
+                {
+                    lineRenderer.enabled = value;
+                }
             }
         }
 

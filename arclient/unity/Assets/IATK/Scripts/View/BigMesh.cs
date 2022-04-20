@@ -164,8 +164,11 @@ namespace IATK
             {
                 var count = Math.Min(mesh.vertexCount, values.Length);
                 float[] xvals = HelperUtils.SubArray(values, cpt, count);
-                Vector3[] vertices = new Vector3[count];
-                Vector3[] normals = new Vector3[count];
+                //Vector3[] vertices = new Vector3[count];
+                //Vector3[] normals = new Vector3[count];
+
+                Vector3[] vertices = mesh.vertices;
+                Vector3[] normals = mesh.normals;
 
                 for (int i = 0; i < count; i++)
                 {
@@ -184,6 +187,23 @@ namespace IATK
                 cpt += mesh.vertexCount;
             }
         }
+
+        /// <summary>
+        /// indices (links) in the bigmesh
+        /// </summary>
+        /// <param name="values"></param>
+        public void updateIndices(int[] values)
+        {
+            int cpt = 0;
+            foreach(var mesh in meshList)
+            {
+                var count = values.Length; //Math.Min(mesh.GetIndexCount(0), values.Length); // If split meshes are reimplemented this needs to be fixed to correctly handle dynamic-sized inputs
+                int[] vals = HelperUtils.SubArray(values, cpt, (int)count);
+                mesh.SetIndices(vals, mesh.GetTopology(0), 0);
+                cpt += (int)mesh.GetIndexCount(0);
+                mesh.RecalculateBounds();
+            }
+	}
 
         /// <summary>
         /// returns the vertex positions of the big mesh

@@ -14,6 +14,7 @@ namespace Vizario
 {
     namespace VApp
     {
+        using CSCallback = System.Func<string, string, string>;
         using JSCallback = System.Func<Jint.Native.JsValue, Jint.Native.JsValue[], Jint.Native.JsValue>;
         public class jWeb : BaseManager<jWeb>
         {
