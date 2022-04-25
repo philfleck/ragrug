@@ -34,6 +34,7 @@ If you use this software, please cite it as below.
 
 - [philfleck's channel](https://www.youtube.com/watch?v=mFxSdvQhSVU)
 - [dieter schmalstiegs's channel](https://www.youtube.com/channel/UCCBRxUZzvQhGyyQJM2SYAXg)
+- [IEEE VR2022 Talk](https://www.youtube.com/watch?v=dJWCHzPvNVg)
 
 ### Quickstart
 
