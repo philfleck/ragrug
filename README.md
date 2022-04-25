@@ -42,6 +42,9 @@ If you use this software, please cite it as below.
 - [ARClient configurations](arclient/cfgs)
 - [ARClient pre-builds](arclient/builds)
 - [ARClient 1.2.124](https://files.icg.tugraz.at/f/ccd54365a08a4f089744/?dl=1)
+- [RagRug NodeRed Packages (npm)](https://www.npmjs.com/package/@ragrug/ragrug-nodered/access)
+- [RagRug NodeRed Packages (github)](https://github.com/philfleck/ragrug-nodered)
+- [RagRug NodeRed Packages (nodered)](https://flows.nodered.org/node/@ragrug/ragrug-nodered)
 
 
 ## Documentation
