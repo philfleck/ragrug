@@ -277,10 +277,28 @@ function MAIN_Init3DButtons() {
 
     // 17e18994.3545c6
     
-    var mopopCnrButton = RT.MRTK.SpawnButton("UIBTN-UNIKON", "UNIKON", "UNIKON", false, function () { CNR_InitFromId("17e18994.3545c6"); });
-    MAIN.buttons.push(mopopCnrButton);
-    RT.Unity.SetParent(mopopCnrButton.go, MAIN.palmHandMenuGo);
-    RT.Unity.SetLocalPose(mopopCnrButton.go, [-0.04, 0.1, 0], null, null);
+    //var mopopCnrButton = RT.MRTK.SpawnButton("UIBTN-UNIKON", "UNIKON", "UNIKON", false, function () { CNR_InitFromId("17e18994.3545c6"); });
+    //MAIN.buttons.push(mopopCnrButton);
+    //RT.Unity.SetParent(mopopCnrButton.go, MAIN.palmHandMenuGo);
+    //RT.Unity.SetLocalPose(mopopCnrButton.go, [-0.04, 0.1, 0], null, null);
+
+    //timemeas
+    //var timeMeasButton = RT.MRTK.SpawnButton("UIBTN-TIMEMEAS", "TIMEMEAS", "TIMEMEAS", false, function () { CNR_InitFromId("d10c741d.e459a8"); });
+    //MAIN.buttons.push(mopopCnrButton);
+    //RT.Unity.SetParent(mopopCnrButton.go, MAIN.palmHandMenuGo);
+    //RT.Unity.SetLocalPose(mopopCnrButton.go, [-0.04, 0.1, 0], null, null);
+
+    //IATK viewbuilder
+    var iatktestButton = RT.MRTK.SpawnButton("UIBTN-iatktest", "IATK Test", "IATK Test", false, function () { IATKTest_ViewBuilder(); })
+    MAIN.buttons.push(iatktestButton);
+    RT.Unity.SetParent(iatktestButton.go, MAIN.palmHandMenuGo);
+    RT.Unity.SetLocalPose(iatktestButton.go, [-0.04, 0.1, 0], null, null);
+
+    //IATK view update
+    var iatktestUpdateButton = RT.MRTK.SpawnButton("UIBTN-iatktestview", "View Test", "View Test", false, function () { IATKTest_View(); })
+    MAIN.buttons.push(iatktestUpdateButton);
+    RT.Unity.SetParent(iatktestUpdateButton.go, MAIN.palmHandMenuGo);
+    RT.Unity.SetLocalPose(iatktestUpdateButton.go, [-0.04, 0.1, 0], null, null);
 
     /*
     //mopop js
@@ -848,6 +866,10 @@ function Main_LocateArea(event) {
                                 var devEnd = "";
                                 if (RT.Help.GetDeviceType() == "ANDROID") {
                                     devEnd = ".android";
+                                }
+
+                                if (RT.Help.GetDeviceType() == "IOS") {
+                                    devEnd = ".ios";
                                 }
 
                                 MAIN.location.envassetbundle = data.envassetbundle;

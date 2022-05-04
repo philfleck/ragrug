@@ -59,6 +59,7 @@ RT.MQTT.RegisterCallback = internal_RegisterMqttCallback;
 RT.MQTT.RegisterCallbackTopic = internal_RegisterMqttCallbackTopic;
 RT.MQTT.UnregisterCallback = internal_UnregisterMqttCallback;
 RT.MQTT.UnregisterCallbackFromTopic = internal_UnregisterCallbackFromTopic;
+RT.MQTT.UnregisterCallbackTopic = internal_UnregisterCallbackTopic;
 RT.MQTT.SetHost = internal_SetHost;
 RT.MQTT.StartClient = internal_StartClient;
 RT.MQTT.Publish = internal_PublishMqtt;
@@ -77,6 +78,7 @@ RT.Unity.CreateGO = internal_CreateGo;
 RT.Unity.CopyGO = internal_CopyGo;
 RT.Unity.CopyGoByName = internal_CopyGoByName;
 RT.Unity.DestroyGO = internal_DestroyGo;
+RT.Unity.IsNull = internal_IsNull;
 RT.Unity.GetVisPrefab = internal_GetVisPrefab;
 RT.Unity.GetVisPrefabNames = internal_GetVisPrefabNames;
 RT.Unity.GetVisPrefabInstance = internal_GetVisPrefabInstance;
@@ -88,6 +90,8 @@ RT.Unity.PlayClickSound = internal_PlayClickSound;
 RT.Unity.PlayNotificationSound = internal_PlayNotificationSound;
 RT.Unity.SpawnNotification = internal_SpawnNotification;
 RT.Unity.SpawnAlert = internal_SpawnAlert;
+RT.Unity.GetDirtyComponentByString = internal_GetDirtyComponentByString;
+RT.Unity.CreateColorGraident = internal_CreateColorGraident;
 
 RT.VIS.GetNewChartObject = internal_GetNewChartObject;
 RT.VIS.GetNewChartObjectIATK = internal_GetNewChartObjectIATK;
@@ -143,11 +147,13 @@ function internal_GetNetwork() {
     //return "NETGEAR81";
     //return "MBR1200B-3c1"; //cradle point
     return "ASUS_5G";
+    //return "TestNT";
     if (RT.Help.GetDeviceType() == "EDITOR") {
         //return "zrga2-5g";
         //return "NETGEAR81-5G";
         //return "NETGEAR81";
         return "ASUS_5G";
+        //return "TestNT";
         //return "MBR1200B-3c1"; //cradle point
     }
 
@@ -393,16 +399,17 @@ function internal_PublishMqttMod(mTopic, mPayload, mLocalOnly) {
  */
 function internal_RegisterMqttCallbackTopic(mFct, mTopic) {
     try {
-        importNamespace("Vizario").MQTTManager.RegisterCallbackTopic(mFct, mTopic);
+        return importNamespace("Vizario").MQTTManager.RegisterCallbackTopic(mFct, mTopic);
     } catch (err) {
         console.log("internal_RegisterMqttCallbackTopic ERROR => " + err);
     }
 }
 
 /**
- * * Register a callback (topic, payload) for a all topics
+ * * Register a callback (topic, payload) for a all topics, returns a hash that can be used to unregister this function
  * to receive mqtt messages
  * @param {function( string:string):void} mFct
+ * @returns {int} index
  */
 function internal_RegisterMqttCallback(mFct) {
     try {
@@ -434,6 +441,19 @@ function internal_UnregisterCallbackFromTopic(mTopic, mRegisteredCallbackFct) {
         importNamespace("Vizario").MQTTManager.UnregisterCbFromTopic(mTopic, mRegisteredCallbackFct);
     } catch (err) {
         console.log("internal_UnregisterCallbackFromTopic ERROR => " + err);
+    }
+}
+
+/**
+ * Unregisters a specific Callback Function from a topic, uses the hash gained from the register method
+ * @param {Function} mRegisteredCallbackFct
+ * @param {string} mTopic
+ */
+function internal_UnregisterCallbackTopic(mIndex, mTopic) {
+    try {
+        importNamespace("Vizario").MQTTManager.UnregisterCallbackTopic(mIndex, mTopic);
+    } catch (err) {
+        console.log("internal_UnregisterCallbackTopic ERROR => " + err);
     }
 }
 
@@ -653,6 +673,58 @@ function internal_SetParent(mChild, mParent) {
 }
 
 /**
+ * 
+ * @param {GameObject} mGameObject
+ * @param {string} mComponentFullName
+ * @return {Component} 
+ */
+function internal_GetDirtyComponentByString(mGameObject, mComponentFullName) {
+    try {
+        if (mGameObject != null) {
+            var mUE = importNamespace("UnityEngine");
+            var compoList = mGameObject.GetComponents(mUE.Component);
+            for (var compoi = 0; compoi < compoList.length; compoi++) {
+                var comp = compoList[compoi];
+                var str = "" + comp + "";
+                str = str.split("(")[1].replace(")", "");
+                if (str == mComponentFullName) {
+                    return comp;
+                }
+            }
+        }
+
+    } catch (err) {
+        console.log("internal_GetDirtyComponentByString ERROR => " + err);
+    }
+    return null;
+}
+
+/**
+ * 
+ * @param {Array} rgbaStart
+ * @param {Array} rgbaEnd
+ * @return {Gradient}
+ */
+function internal_CreateColorGraident(rgbaStart, rgbaEnd) {
+    var mUE = importNamespace("UnityEngine");
+    var grad = new mUE.Gradient();
+    var colorKey = [new mUE.GradientColorKey(), new mUE.GradientColorKey()];
+    colorKey[0].color = new mUE.Color(rgbaStart[0], rgbaStart[1], rgbaStart[2]);
+    colorKey[0].time = 0.0;
+    colorKey[1].color = new mUE.Color(rgbaEnd[0], rgbaEnd[1], rgbaEnd[2]);
+    colorKey[1].time = 1.0;
+
+    var alphaKey = [new MAIN.UE.GradientAlphaKey(), new MAIN.UE.GradientAlphaKey()];
+    alphaKey[0].alpha = rgbaStart[3];
+    alphaKey[0].time = 0.0;
+    alphaKey[1].alpha = rgbaEnd[3];
+    alphaKey[1].time = 1.0;
+
+    grad.SetKeys(colorKey, alphaKey);
+    return grad;
+}
+
+/**
  * Sets the local R,T,s of an GameObject
  * @param {GameObject} mGo
  * @param {[x:number, y:number, z:number]} mT
@@ -759,6 +831,18 @@ function internal_DestroyGo(mGo) {
         return importNamespace("RR").Runtime.DestroyGO(mGo);
     } catch (err) {
         console.log("internal_DestroyGo ERROR => " + err);
+    }
+}
+
+/**
+ *
+ * @param {UnityEngine.Object} obj
+ */
+function internal_IsNull(obj) {
+    try {
+        return importNamespace("RR").Runtime.IsNull(obj);
+    } catch (err) {
+        console.log("internal_IsNull ERROR => " + err);
     }
 }
 
@@ -2080,10 +2164,15 @@ function internal_RegisterModelTrackedNotification(mCallbackFunction) {
 /// MRTK
 /// 
 
-function internal_SpawnNearMenu(mGoName) {
+function internal_SpawnNearMenu(mGoName, prefabName) {
     var nm = {};
     nm.goName = mGoName;
-    nm.prefabName = "NearMenu4x2";
+    if (!RT.Unity.IsNull(prefabName)) {
+        nm.prefabName = prefabName;
+    }
+    else {
+        nm.prefabName = "NearMenu4x2";
+    }
     nm.go = RT.Unity.GetVisPrefabInstance(nm.prefabName, nm.goName);
     nm.goButtons = nm.go.transform.GetChild(2);
 

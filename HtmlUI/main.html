@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+﻿s<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
 <head>
@@ -12,6 +12,8 @@
     <script type='text/javascript' src="./main.js"></script>
     <!--<script type='text/javascript' src="./mopop.js"></script>-->
     <script type='text/javascript' src="./cnr.js"></script>
+    <script type='text/javascript' src="./rrjsiatk.js"></script>
+    <script type='text/javascript' src="./iatktest.js"></script>
 
     <title>RR0</title>
 
@@ -309,7 +311,7 @@
 
         //Test notification
         RT.Web.SetTiimeout(6000, function () {
-            RT.Unity.SpawnNotification(5, "Application Started");
+            RT.Unity.SpawnNotification(5, "Application Started (" + RT.Help.GetDeviceType() + ")");
 
             //MAIN_IATKTest();
         });
@@ -333,7 +335,7 @@
         $("#rr_menu").hide();
         $("#ws_popup_hook").hide();
         var murl = MAIN.WEBAPI.uiurl + "/docu/img/ragruglogo.png";
-        $("#ws_popup_hook").html('<div style="background-color:rgb(0,77,109);width:73vw;height:25vh;border-radius: 20px;border:solid white 8px;"><img src="' + murl + '" height="100%" /><div style="display:inline-block;vertical-align:top;margin-left:2vw;margin-bottom:3vh;padding:1vh;font-size:12vh;"><span style="font-size:6vh;">Welcome to</span></br>RagRug 1.2.109</div></div>');
+        $("#ws_popup_hook").html('<div style="background-color:rgb(0,77,109);width:73vw;height:25vh;border-radius: 20px;border:solid white 8px;"><img src="' + murl + '" height="100%" /><div style="display:inline-block;vertical-align:top;margin-left:2vw;margin-bottom:3vh;padding:1vh;font-size:12vh;"><span style="font-size:6vh;">Welcome to</span></br>RagRug 1.2.128</div></div>');
         $("#ws_popup_hook").show();
         console.log("RR Setting up logo end");
 

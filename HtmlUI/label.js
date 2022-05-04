@@ -80,9 +80,10 @@ function Label_Init() {
 
         }
 
-        if (thisPart.hasOwnProperty("loadcnr")) {
+        if (thisPart.hasOwnProperty("loadcnr") && thisPart.hasOwnProperty("cnrid")) {
             if (thisPart.loadcnr == true) {
-                LABEL_InitCnr();
+                //LABEL_InitCnr();
+                CNR_InitFromId(thisPart.cnrid);
             } else {
                 //do not load cnr
             }
