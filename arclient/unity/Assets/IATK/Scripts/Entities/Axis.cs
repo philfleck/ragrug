@@ -207,7 +207,6 @@ namespace IATK
             List<GameObject> axisTickLabels = GetAxisTickLabels();
             int currentNumberOfLabels = axisTickLabels.Count;
             int targetNumberOfLabels = CalculateNumAxisTickLabels();
-            
             if (currentNumberOfLabels != targetNumberOfLabels)
             {
                 DestroyAxisTickLabels();
@@ -218,7 +217,7 @@ namespace IATK
                     Instantiate(axisTickLabelPrefab, axisTickLabelHolder.transform);
                 }
             }
-            
+
             // Update label positions and text
             axisTickLabels = GetAxisTickLabels();
             for (int i = 0; i < targetNumberOfLabels; i++)
@@ -227,14 +226,22 @@ namespace IATK
                 label.SetActive(true);
                 float y = GetAxisTickLabelPosition(i, targetNumberOfLabels);
                 SetYLocalPosition(label.transform, y * Length);
-                
+
                 TextMeshPro labelText = label.GetComponentInChildren<TextMeshPro>();
                 labelText.gameObject.SetActive(y >= 0.0f && y <= 1.0f);
                 labelText.text = GetAxisTickLabelText(i, targetNumberOfLabels);
                 labelText.color = new Color(1, 1, 1, GetAxisTickLabelFiltered(i, targetNumberOfLabels) ? 0.4f : 1.0f);
             }
         }
-        
+
+        /// <summary>
+        /// Updates the axis tick spacing. Only applies after next label update.
+        /// </summary>
+        public void UpdateAxisTickSpacing(float newValue)
+        {
+            AxisTickSpacing = newValue;
+        }
+
         /// <summary>
         /// Destroys all of the axis tick labels on this axis, excluding the referenced base label.
         /// </summary>
@@ -308,7 +315,7 @@ namespace IATK
                 // If this discrete dimension has less unique values than the maximum number of ticks allowed due to spacing,
                 // give an axis tick label for each unique value
                 //int numValues = ((CSVDataSource)dataSource).TextualDimensionsListReverse[AttributeName].Count;
-                int numValues = dataSource.getNumberOfCategories(AttributeName);                
+                int numValues = dataSource.getNumberOfCategories(AttributeName);
                 int maxTicks = Mathf.CeilToInt(Length / AxisTickSpacing);
                 if (numValues < maxTicks)
                     return numValues;

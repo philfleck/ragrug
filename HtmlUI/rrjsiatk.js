@@ -31,6 +31,7 @@ CNRIF.View.AddAxes = internal_ViewAddAxes;
 CNRIF.View.SetAxisData = internal_ViewSetAxisData;
 CNRIF.View.ShowAxis = internal_ViewShowAxis;
 CNRIF.View.SetAxisLength = internal_ViewSetAxisLength;
+CNRIF.View.SetAxisTickSpacing = internal_SetAxisTickSpacing;
 CNRIF.View.DestroyAxis = internal_ViewDestroyAxis;
 
 CNRIF.RTDS.Create = internal_RTDSCreate;
@@ -410,15 +411,13 @@ CNR.clientFunctions.RRJSIATK_RTDSAddDimension = function (msg, node) {
 // RTDSAddDemensionDiscrete
 CNR.clientNodeInitFunctions.RRJSIATK_RTDSAddDimensionDiscrete = function (node, mNode) {
     node.dimensionName = mNode.dimensionName;
-    node.categories = mNode.categories;
-    node.dataType = mNode.dataType;
     return node;
 }
 
 CNR.clientFunctions.RRJSIATK_RTDSAddDimensionDiscrete = function (msg, node) {
     var rtdsName = internal_util_GetOrDefault(msg.rtds, "name", "");
 
-    if (CNRIF.RTDS.AddDimensionDiscrete(rtdsName, node.dimensionName, node.categories, node.dataType)) {
+    if (CNRIF.RTDS.AddDimensionDiscrete(rtdsName, node.dimensionName)) {
         msg.rtds.dimensions.push({ name: node.dimensionName, categories: node.categories, dataType: node.dataType })
     }
 
@@ -454,7 +453,7 @@ CNR.clientNodeInitFunctions.RRJSIATK_RTDSSetData = function (node, mNode) {
     return node;
 }
 
-CNR.clientFunctions.RRJSIATK_RTDSSetData = function (msg, node) { // TODO: Make field configurable and add array support
+CNR.clientFunctions.RRJSIATK_RTDSSetData = function (msg, node) {
     var rtdsName = internal_util_GetOrDefault(msg.rtds, "name", "");
     var data = internal_util_GetLocation(msg, node.location);
     var rtds = internal_util_RetrieveRTDS(rtdsName, "RRJSIATK_RTDSSetData");
@@ -567,6 +566,36 @@ CNR.clientFunctions.RRJSIATK_ViewShowAxis = function (msg, node) {
     return msg;
 }
 
+// ViewUpdateAxis
+CNR.clientNodeInitFunctions.RRJSIATK_ViewUpdateAxis = function (node, mNode) {
+    node.direction = mNode.direction;
+    return node;
+}
+
+CNR.clientFunctions.RRJSIATK_ViewUpdateAxis = function (msg, node) {
+    var container = CNRIF.View.Get(msg.view.name, "RRJSIATK_ViewUpdateAxis");
+    container[internal_util_DirectionToField(node.direction)].UpdateAxisTickLabels();
+    return msg;
+}
+
+
+// SetAxisTickSpacing
+CNR.clientNodeInitFunctions.RRJSIATK_SetAxisTickSpacing = function (node, mNode) {
+    node.spacing = mNode.spacing;
+    node.direction = mNode.direction;
+    node.location = mNode.location;
+    return node;
+}
+
+CNR.clientFunctions.RRJSIATK_SetAxisTickSpacing = function (msg, node) {
+    var newSpacing = internal_util_GetLocation(msg, node.location);
+    if (newSpacing === undefined) {
+        newSpacing = node.spacing;
+    }
+    CNRIF.View.SetAxisTickSpacing(msg.view.name, node.direction, newSpacing);
+    return msg;
+}
+
 // ViewDestroyAxis
 CNR.clientNodeInitFunctions.RRJSIATK_ViewDestroyAxis = function (node, mNode) {
     node.direction = mNode.direction;
@@ -660,7 +689,6 @@ function internal_VBSetSizes(vbName, data) {
 }
 
 function internal_VBCreateView(vbName) {
-    // TODO: Consider adding a parameter for where to instantiate, scene, world or usercanvas
     try {
         var instance = internal_util_RetrieveVB(vbName)
         if (instance !== undefined) {
@@ -1067,7 +1095,7 @@ function internal_ViewAddAxes(viewName) {
                 var axis = RT.UE.Object.Instantiate(RT.UE.Resources.Load("Axis")).GetComponent(CNRIF.IATK.Axis);
                 container[field] = axis;
                 axis.transform.SetParent(container.view.transform);
-                var offset = -0.01; // Maybe make configurable, but probably not
+                var offset = -0.01;
                 var pos = [offset, offset, offset];
                 pos[i - 1] = 0;
                 RT.Unity.SetLocalPose(axis.gameObject, pos, [0, 0, 0, 1], [1, 1, 1]);
@@ -1128,6 +1156,21 @@ function internal_ViewSetAxisLength(viewName, direction, newLength) {
     }
 }
 
+function internal_SetAxisTickSpacing(viewName, direction, newSpacing) {
+    try {
+        var container = internal_util_RetrieveViewContainer(viewName);
+        if (container !== undefined) {
+            var axis = internal_util_GetAxis(container, direction, "internal_SetAxisTickSpacing", viewName)
+            if (axis !== undefined) {
+                axis.UpdateAxisTickSpacing(newSpacing);
+            }
+        }
+    }
+    catch (err) {
+        console.log("internal_SetAxisTickSpacing ERROR => " + err);
+    }
+}
+
 function internal_ViewDestroyAxis(viewName, direction) {
     try {
         var container = internal_util_RetrieveViewContainer(viewName);
@@ -1174,11 +1217,11 @@ function internal_RTDSAddDimension(dataName, dimensionName, min, max, dataType) 
     }
 }
 
-function internal_RTDSAddDimensionDiscrete(dataName, dimensionName, categories, dataType) {
+function internal_RTDSAddDimensionDiscrete(dataName, dimensionName) {
     try {
         var rtds = internal_util_RetrieveRTDS(dataName, "internal_RTDSAddDimensionDiscrete");
         if (rtds !== undefined) {
-            if (!rtds.AddDimension(dimensionName, categories, dataType)) {
+            if (!rtds.AddStringDimension(dimensionName)) {
                 console.log("internal_RTDSAddDimensionDiscrete ERROR => Dimension of name \"" + dimensionName + "\" already exists.")
                 return false;
             }
@@ -1479,6 +1522,9 @@ function internal_util_GetLocation(msg, locationString) {
         var parts = locationString.split(".");
         var location = msg;
         for (var i = 0; i < parts.length; i++) {
+            if (!location.hasOwnProperty(parts[i])) {
+                return undefined;
+            }
             location = location[parts[i]];
         }
         return location;

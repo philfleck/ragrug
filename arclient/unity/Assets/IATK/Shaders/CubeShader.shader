@@ -155,7 +155,7 @@ Shader "IATK/CubeShader"
 					UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 					UNITY_TRANSFER_INSTANCE_ID(v, o);
 
-					// Accessed instanced variables
+					// Access instanced variables
 					float Tween = UNITY_ACCESS_INSTANCED_PROP(Props, _Tween);
 					float TweenSize = UNITY_ACCESS_INSTANCED_PROP(Props, _TweenSize);
                     float MinNormX = UNITY_ACCESS_INSTANCED_PROP(Props, _MinNormX);
@@ -263,8 +263,6 @@ Shader "IATK/CubeShader"
 					float3 nW = float3(1, 0, 0);
 					float3 nU = float3(0, 1, 0);
 					float3 nD = float3(1, -1, 0);
-
-					float4x4 vp = UNITY_MATRIX_MVP;
 					
 					// FACE 1
 					half nl;
@@ -286,12 +284,12 @@ Shader "IATK/CubeShader"
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
 
-					o.vertex =  UnityObjectToClipPos(pNWD);
+					o.vertex = UnityObjectToClipPos(pNWD);
 					o.tex0 = float2(0.0f, 0.0f);
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
 
-					o.vertex =  UnityObjectToClipPos( pNED);
+					o.vertex = UnityObjectToClipPos(pNED);
 					o.tex0 = float2(1.0f, 0.0f);
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
@@ -306,7 +304,7 @@ Shader "IATK/CubeShader"
 					o.color.rgb += ShadeSH9(half4(worldNormal, 1));
 					o.color.rgb *= color.rgb;
 
-					o.vertex = UnityObjectToClipPos( pNED);
+					o.vertex = UnityObjectToClipPos(pNED);
 					o.tex0 = float2(1.0f, 0.0f);
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
@@ -316,12 +314,12 @@ Shader "IATK/CubeShader"
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
 
-					o.vertex =  UnityObjectToClipPos(pSED);
+					o.vertex = UnityObjectToClipPos(pSED);
 					o.tex0 = float2(0.0f, 0.0f);
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
 
-					o.vertex =  UnityObjectToClipPos(pSEU);
+					o.vertex = UnityObjectToClipPos(pSEU);
 					o.tex0 = float2(0.0f, 1.0f);
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
@@ -346,12 +344,12 @@ Shader "IATK/CubeShader"
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
 
-					o.vertex =  UnityObjectToClipPos( pSWU);
+					o.vertex = UnityObjectToClipPos(pSWU);
 					o.tex0 = float2(0.0f, 0.0f);
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
 
-					o.vertex =  UnityObjectToClipPos(pSEU);
+					o.vertex = UnityObjectToClipPos(pSEU);
 					o.tex0 = float2(0.0f, 1.0f);
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
@@ -370,17 +368,17 @@ Shader "IATK/CubeShader"
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
 
-					o.vertex = UnityObjectToClipPos( pSEU);
+					o.vertex = UnityObjectToClipPos(pSEU);
 					o.tex0 = float2(1.0f, 1.0f);
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
 
-					o.vertex =  UnityObjectToClipPos(pSWD);
+					o.vertex = UnityObjectToClipPos(pSWD);
 					o.tex0 = float2(0.0f, 0.0f);
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
 
-					o.vertex =  UnityObjectToClipPos(pSED);
+					o.vertex = UnityObjectToClipPos(pSED);
 					o.tex0 = float2(1.0f, 0.0f);
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
@@ -404,12 +402,12 @@ Shader "IATK/CubeShader"
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
 
-					o.vertex =  UnityObjectToClipPos(pSWD);
+					o.vertex = UnityObjectToClipPos(pSWD);
 					o.tex0 = float2(0.0f, 0.0f);
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
 
-					o.vertex =  UnityObjectToClipPos(pSED);
+					o.vertex = UnityObjectToClipPos(pSED);
 					o.tex0 = float2(0.0f, 1.0f);
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
@@ -433,12 +431,12 @@ Shader "IATK/CubeShader"
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
 
-					o.vertex =  UnityObjectToClipPos( pSWD);
+					o.vertex = UnityObjectToClipPos(pSWD);
 					o.tex0 = float2(0.0f, 0.0f);
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
 
-					o.vertex =  UnityObjectToClipPos(pSWU);
+					o.vertex = UnityObjectToClipPos(pSWU);
 					o.tex0 = float2(0.0f, 1.0f);
 					UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(p[0], o);
 					triStream.Append(o);
@@ -447,7 +445,7 @@ Shader "IATK/CubeShader"
 				}
 				
 				// Fragment Shader -----------------------------------------------
-				f_output FS_Main(g2f input) : COLOR
+				f_output FS_Main(g2f input)
 				{
 					f_output o;
 					

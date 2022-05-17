@@ -221,6 +221,8 @@
 					//if (points[0].color.w == 0) points[1].color.w = 0;
 					//if (points[1].color.w == 0) points[0].color.w = 0;
 
+					float Size = UNITY_ACCESS_INSTANCED_PROP(Props, _Size);
+
 					// Line geometry
 					float4 p0 = points[0].vertex;
 					float4 p1 = points[1].vertex;
@@ -239,7 +241,7 @@
 
 					float3 unit_z = normalize(float3(0, 0, -1));
 					float3 normal = normalize(cross(unit_z, dir) * ratio);
-					float width = _Size*0.001;// * normaliseValue(points[0].normal.y, 0.0, 1.0, _MinSize, _MaxSize);
+					float width = Size*0.001;// * normaliseValue(points[0].normal.y, 0.0, 1.0, _MinSize, _MaxSize);
 
 					g2f v[4];
 

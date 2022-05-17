@@ -24,6 +24,7 @@ namespace IATK
         
         private Dictionary<string, Dictionary<int, string>> textualDimensionsList = new Dictionary<string, Dictionary<int, string>>();
         private Dictionary<string, Dictionary<string, int>> textualDimensionsListReverse = new Dictionary<string, Dictionary<string, int>>();
+        private Dictionary<string, string[]> textualDimensions = new Dictionary<string, string[]>();
 
         private float[] GetDefaultArray()
         {
@@ -35,7 +36,7 @@ namespace IATK
             return dataArray;
         }
 
-        public bool shiftdata = true;
+        public bool shiftdata = false;
 
         /// <summary>
         /// Creates a dimension that can later have data set to it
@@ -54,10 +55,9 @@ namespace IATK
             return AddDimension(dimensionName, 0, dimensionSizeLimit, DataType.String);
         }
 
-
         public bool SetDimensionMinMax(string dimensionName, float min, float max)
         {
-            if (textualDimensionsList.ContainsKey(dimensionName))
+            if (textualDimensions.ContainsKey(dimensionName))
             {
                 var dd = this[dimensionName];
                 var meta = dd.MetaData;
@@ -71,15 +71,24 @@ namespace IATK
 
         public bool SetDimensionSizeLimit(int newLimit)
         {
-            if (dimensionPointers.Count > 0) // Do not allow resize if data is already present
+            if(dimensionPointers.Count > 0) // Do not allow resize if data is already present
             {
                 return false;
-            }
+			}
 
             dimensionSizeLimit = newLimit;
             return true;
-        }
+		}
 
+        public void setShiftData(bool newValue)
+        {
+            shiftdata = newValue;
+		}
+
+        public bool getShiftData()
+        {
+            return shiftdata;
+		}
 
         /// <summary>
         /// Creates a dimension that can later have data set to it
@@ -88,11 +97,11 @@ namespace IATK
         /// <param name="minVal">The minimum value the dimension can hold</param>
         /// <param name="maxVal">The maximum value the dimension can hold</param>
         /// <param name="type">The data type of the dimension</param>
-        /// <returns>True if successfully added, false otherwise</returns>
+        /// <returns>True if successfully added, false otherwise</returns>f
         public bool AddDimension(string dimensionName, float minVal, float maxVal, DataType type = DataType.Float)
         {
             // Don't add the dimension if it already exists
-            if (textualDimensionsList.ContainsKey(dimensionName)) return false;
+            if (textualDimensions.ContainsKey(dimensionName)) return false;
 
             var metaData = new DimensionData.Metadata();
             metaData.minValue = minVal;
@@ -101,11 +110,15 @@ namespace IATK
 
             int index = dimensionData.Count;
 
-            textualDimensionsList.Add(dimensionName, new Dictionary<int, string>());
-            textualDimensionsListReverse.Add(dimensionName, new Dictionary<string, int>());
+            var textDim = new string[dimensionSizeLimit];
+            for(int i = 0; i < dimensionSizeLimit; i++)
+            {
+                textDim[i] = "";
+            }
+            textualDimensions.Add(dimensionName, textDim);
 
             var dd = new DimensionData(dimensionName, index, metaData);
-            dd.setData(GetDefaultArray(), textualDimensionsList);
+            dd.setData(GetDefaultArray(), null);
             
             dimensionData.Add(dd);
             dimensionPointers.Add(0);
@@ -150,19 +163,12 @@ namespace IATK
 
             try
             {
-                if (!textualDimensionsListReverse[dimensionName].ContainsKey(val))
+                if(!textualDimensions.ContainsKey(dimensionName))
                 {
-                    //int numberOfDimensions = textualDimensionsList[dimensionName].Count;
-                    //textualDimensionsList[dimensionName].Add(numberOfDimensions, val);
-                    //textualDimensionsListReverse[dimensionName].Add(val, numberOfDimensions);
-
-                    textualDimensionsList[dimensionName].Add(id, val);
-                    textualDimensionsListReverse[dimensionName].Add(val, id);
-                    //textualDimensionsList[dimensionName][id] = val;
-                    //textualDimensionsListReverse[dimensionName][val] = id;
+                    return false;
                 }
-
-                float idx = (float)textualDimensionsListReverse[dimensionName][val];
+                textualDimensions[dimensionName][id] = val;
+                float idx = (float)id;
                 //return SetDataStrValById(dimensionName, idx, id);
 
                 if (dbg_on)
@@ -402,15 +408,24 @@ namespace IATK
         {
             try
             {
-                if (!textualDimensionsListReverse[dimensionName].ContainsKey(val))
+                var textDim = textualDimensions[dimensionName];
+                int ptr = dimensionPointers[this[dimensionName].Index];
+
+                if(!shiftdata)
                 {
-                    int numberOfDimensions = textualDimensionsList[dimensionName].Count;
-                    textualDimensionsList[dimensionName].Add(numberOfDimensions, val);
-                    textualDimensionsListReverse[dimensionName].Add(val, numberOfDimensions);
+                    textDim[ptr] = val;
+                }
+                else
+                {
+                    ptr = dimensionSizeLimit - 1;
+                    for (var i = 1; i < dimensionSizeLimit; i++)
+                    {
+                        textDim[i - 1] = textDim[i];
+                    }
+                    textDim[ptr] = val;
                 }
 
-                float idx = (float)textualDimensionsListReverse[dimensionName][val];
-                return SetData(dimensionName, idx);
+                return SetData(dimensionName, ptr);
             }
             catch (Exception e)
             {
@@ -451,7 +466,7 @@ namespace IATK
         public void OverrideData(string dimensionName, float[] values)
         {
             var dd = this[dimensionName];
-            dd.setData(values, textualDimensionsList);
+            dd.setData(values, null);
             //dd.Data[index] = normaliseValue(val, dd.MetaData.minValue, dd.MetaData.maxValue, 0f, 1f);
         }
 
@@ -459,7 +474,7 @@ namespace IATK
         {
             var dd = this[dimensionName];
             //dimensionSizeLimit = count;
-            dd.setData(dd.Data.SubArray(0, count), textualDimensionsList);
+            dd.setData(dd.Data.SubArray(0, count), null);
         }
 
         /// <summary>
@@ -497,7 +512,7 @@ namespace IATK
         public DimensionData GetDataByIndex(int index)
         {
             return this[index];
-        }
+		}
 
         /// <summary>
         /// Gets the dimension data with the specified identifier. Named function to be called from JS.
@@ -506,7 +521,7 @@ namespace IATK
         public DimensionData GetDataByIdentifier(string identifier)
         {
             return this[identifier];
-        }
+		}
 
         /// <summary>
         /// Will always return true since the data is filled at runtime.
@@ -537,14 +552,12 @@ namespace IATK
 
         public override int getNumberOfCategories(int identifier)
         {
-            var cnt = textualDimensionsList[this[identifier].Identifier].Count;
-            return cnt;
+            return dimensionSizeLimit;
         }
 
         public override int getNumberOfCategories(string identifier)
         {
-            var cnt = textualDimensionsList[this[identifier].Identifier].Count;
-            return cnt;
+            return dimensionSizeLimit;
         }
 
         /// <summary>
@@ -569,14 +582,10 @@ namespace IATK
 
                 //TODO check that here further
                 normValue *= (meta.maxValue-1);
-                if (textualDimensionsList[identifier].ContainsKey((int)normValue))
+
+                if (textualDimensions.ContainsKey(identifier))
                 {
-                    var strVal = textualDimensionsList[identifier][(int)normValue];
-                    if (identifier == "year")
-                    {
-                        Debug.Log("SetDataStrStrByIdx getOriginalValue strVal => " + strVal);
-                    }
-                    return strVal;
+                    return textualDimensions[identifier][(int)normValue];
                 }
 
                 if (identifier == "year")
@@ -603,12 +612,10 @@ namespace IATK
 
             if (meta.type == DataType.String)
             {
-                if (textualDimensionsList[this[identifier].Identifier].ContainsKey((int)normValue))
+                if(textualDimensions.ContainsKey(this[identifier].Identifier))
                 {
-                    var strVal = textualDimensionsList[this[identifier].Identifier][(int)normValue];
-                    return strVal;
+                    return textualDimensions[this[identifier].Identifier][(int)normValue];
                 }
-                return "NOT SET";
             }
 
             return normValue;

@@ -230,8 +230,6 @@
                     float MinSize = UNITY_ACCESS_INSTANCED_PROP(Props, _MinSize);
                     float MaxSize = UNITY_ACCESS_INSTANCED_PROP(Props, _MaxSize);
 					
-					float4x4 MV = UNITY_MATRIX_MV;
-					float4x4 vp = UNITY_MATRIX_VP;
 					float3 up = UNITY_MATRIX_IT_MV[1].xyz;
 					float3 right =  -UNITY_MATRIX_IT_MV[0].xyz;
 
@@ -280,7 +278,7 @@
 				}
 
 				// Fragment Shader -----------------------------------------------
-				f_output FS_Main(g2f input) : SV_Target0
+				f_output FS_Main(g2f input)
 				{
 					f_output o;
 					

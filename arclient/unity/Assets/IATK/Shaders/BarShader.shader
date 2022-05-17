@@ -35,8 +35,8 @@ Shader "IATK/BarShader"
             Cull Off
 			Lighting Off
 			LOD 400
-			ZTest [unity_GUIZTestMode]
 			ZWrite On
+			ZTest [unity_GUIZTestMode]
 			Tags
 			{
 				"LightMode" = "ForwardBase"
@@ -62,7 +62,7 @@ Shader "IATK/BarShader"
           		    float4 position : POSITION;
             		float4 color: COLOR;
 					float3 normal: NORMAL;
-					float4 uv_MainTex : TEXCOORD0; // index, vertex size, filtered. prev size
+					float4 uv_MainTex : TEXCOORD0; // index, vertex size, filtered, prev size
 					
                     UNITY_VERTEX_INPUT_INSTANCE_ID
         		};
@@ -83,8 +83,8 @@ Shader "IATK/BarShader"
 					float4 vertex : SV_POSITION;
 					float4 color : COLOR;
 					float2 tex0	: TEXCOORD0;
-					float  isBrushed : FLOAT;
-					float size : FLOAT;
+					float isBrushed : FLOAT;
+					float size : SIZE;
 					
                     UNITY_VERTEX_OUTPUT_STEREO
 				};
@@ -277,7 +277,6 @@ Shader "IATK/BarShader"
 					//float3 nW = float3(-1, 0, 0);
 					//float3 nU = float3(0, 1, 0);
 					//float3 nD = float3(0, -1, 0);
-					float4x4 vp = UNITY_MATRIX_MVP;
 
 					// FACE 1
 					half nl;
@@ -499,5 +498,5 @@ Shader "IATK/BarShader"
 		}
 	}
 	
-	FallBack  "Transparent"
+	
 }
