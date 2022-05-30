@@ -32,6 +32,8 @@ CNRIF.View.SetAxisData = internal_ViewSetAxisData;
 CNRIF.View.ShowAxis = internal_ViewShowAxis;
 CNRIF.View.SetAxisLength = internal_ViewSetAxisLength;
 CNRIF.View.SetAxisTickSpacing = internal_SetAxisTickSpacing;
+CNRIF.View.SetAxisOffset = internal_SetAxisOffset;
+CNRIF.View.ViewUpdateAxis = internal_ViewUpdateAxis;
 CNRIF.View.DestroyAxis = internal_ViewDestroyAxis;
 
 CNRIF.RTDS.Create = internal_RTDSCreate;
@@ -280,17 +282,21 @@ CNR.clientFunctions.RRJSIATK_GetViewAttribute = function (msg, node) {
 // GetView
 CNR.clientNodeInitFunctions.RRJSIATK_GetView = function (node, mNode) {
     node.viewName = mNode.viewName;
-    node.onFail = mNode.onFail;
+    node.msgBehavior = parseInt(mNode.msgBehavior, 10);
     return node;
 }
 
 CNR.clientFunctions.RRJSIATK_GetView = function (msg, node) {
-    var view = internal_util_RetrieveViewContainer(node.viewName, "RRJSIATK_GetView").view;
+    var container = internal_util_RetrieveViewContainer(node.viewName, "RRJSIATK_GetView");
     msg.view = {};
     msg.view.name = node.viewName;
-    return msg;
 
-    return (view !== undefined || node.onFail === "true") ? msg : null;
+    if ((node.msgBehavior === 0) ||
+        (container !== undefined && node.msgBehavior === 1) ||
+        (container === undefined && node.msgBehavior === 2)) {
+        return msg;
+    }
+    return null;
 }
 
 // HideShowView
@@ -427,7 +433,7 @@ CNR.clientFunctions.RRJSIATK_RTDSAddDimensionDiscrete = function (msg, node) {
 // RTDSGet
 CNR.clientNodeInitFunctions.RRJSIATK_RTDSGet = function (node, mNode) {
     node.rtdsName = mNode.rtdsName;
-    node.onFail = mNode.onFail;
+    node.msgBehavior = parseInt(mNode.msgBehavior, 10);
     return node;
 }
 
@@ -437,7 +443,12 @@ CNR.clientFunctions.RRJSIATK_RTDSGet = function (msg, node) {
         msg.rtds = {};
         msg.rtds.name = node.rtdsName;
 
-        return (rtds !== undefined || node.onFail === "true") ? msg : null;
+        if ((node.msgBehavior === 0) ||
+            (rtds !== undefined && node.msgBehavior === 1) ||
+            (rtds === undefined && node.msgBehavior === 2)) {
+            return msg;
+        }
+        return null;
     }
     catch (err) {
         console.log("RRJSIATK_RTDSGet ERROR => " + err);
@@ -448,8 +459,8 @@ CNR.clientFunctions.RRJSIATK_RTDSGet = function (msg, node) {
 // RTDSSetData
 CNR.clientNodeInitFunctions.RRJSIATK_RTDSSetData = function (node, mNode) {
     node.dimensionName = mNode.dimensionName;
-    node.context = mNode.context;
     node.location = mNode.location;
+    node.context = mNode.context;
     return node;
 }
 
@@ -521,11 +532,12 @@ CNR.clientFunctions.RRJSIATK_RTDSDestroy = function (msg, node) {
 
 // ViewAddAxes
 CNR.clientNodeInitFunctions.RRJSIATK_ViewAddAxes = function (node, mNode) {
+    node.axes = mNode.axes.split(",");
     return node;
 }
 
 CNR.clientFunctions.RRJSIATK_ViewAddAxes = function (msg, node) {
-    CNRIF.View.AddAxes(msg.view.name);
+    CNRIF.View.AddAxes(msg.view.name, node.axes);
     return msg;
 }
 
@@ -533,56 +545,36 @@ CNR.clientFunctions.RRJSIATK_ViewAddAxes = function (msg, node) {
 CNR.clientNodeInitFunctions.RRJSIATK_ViewSetAxisData = function (node, mNode) {
     node.dataSource = mNode.dataSource;
     node.dimension = mNode.dimension;
-    node.direction = mNode.direction;
+    node.axes = mNode.axes.split(",");
     return node;
 }
 
 CNR.clientFunctions.RRJSIATK_ViewSetAxisData = function (msg, node) {
-    CNRIF.View.SetAxisData(msg.view.name, node.dataSource, node.direction, node.dimension);
+    CNRIF.View.SetAxisData(msg.view.name, node.dataSource, node.axes, node.dimension);
     return msg;
 }
 
 // ViewSetAxisLength
 CNR.clientNodeInitFunctions.RRJSIATK_ViewSetAxisLength = function (node, mNode) {
-    node.newLength = mNode.newLength;
-    node.direction = mNode.direction;
+    node.newLength = parseFloat(mNode.newLength);
+    node.axes = mNode.axes.split(",");
+    node.location = mNode.location;
     return node;
 }
 
 CNR.clientFunctions.RRJSIATK_ViewSetAxisLength = function (msg, node) {
-    CNRIF.View.SetAxisLength(msg.view.length, node.direction, node.newLength);
+    var newLength = internal_util_GetLocation(msg, node.location);
+    if (newLength === undefined) {
+        newLength = node.spacing;
+    }
+    CNRIF.View.SetAxisLength(msg.view.name, node.axes, node.newLength);
     return msg;
 }
-
-// ViewShowAxis
-CNR.clientNodeInitFunctions.RRJSIATK_ViewShowAxis = function (node, mNode) {
-    node.shown = mNode.shown;
-    node.direction = mNode.direction;
-    return node;
-}
-
-CNR.clientFunctions.RRJSIATK_ViewShowAxis = function (msg, node) {
-    CNRIF.View.ShowAxis(msg.view.name, node.direction, node.shown);
-    return msg;
-}
-
-// ViewUpdateAxis
-CNR.clientNodeInitFunctions.RRJSIATK_ViewUpdateAxis = function (node, mNode) {
-    node.direction = mNode.direction;
-    return node;
-}
-
-CNR.clientFunctions.RRJSIATK_ViewUpdateAxis = function (msg, node) {
-    var container = CNRIF.View.Get(msg.view.name, "RRJSIATK_ViewUpdateAxis");
-    container[internal_util_DirectionToField(node.direction)].UpdateAxisTickLabels();
-    return msg;
-}
-
 
 // SetAxisTickSpacing
 CNR.clientNodeInitFunctions.RRJSIATK_SetAxisTickSpacing = function (node, mNode) {
-    node.spacing = mNode.spacing;
-    node.direction = mNode.direction;
+    node.spacing = parseFloat(mNode.spacing);
+    node.axes = mNode.axes.split(",");
     node.location = mNode.location;
     return node;
 }
@@ -592,18 +584,58 @@ CNR.clientFunctions.RRJSIATK_SetAxisTickSpacing = function (msg, node) {
     if (newSpacing === undefined) {
         newSpacing = node.spacing;
     }
-    CNRIF.View.SetAxisTickSpacing(msg.view.name, node.direction, newSpacing);
+    CNRIF.View.SetAxisTickSpacing(msg.view.name, node.axes, newSpacing);
+    return msg;
+}
+
+// SetAxisOffset
+CNR.clientNodeInitFunctions.RRJSIATK_SetAxisOffset = function (node, mNode) {
+    node.offset = parseFloat(mNode.offset);
+    node.axes = mNode.axes.split(",");
+    node.location = mNode.location;
+    return node;
+}
+
+CNR.clientFunctions.RRJSIATK_SetAxisOffset = function (msg, node) {
+    var newOffset = internal_util_GetLocation(msg, node.location);
+    if (newOffset === undefined) {
+        newOffset = node.offset;
+    }
+    CNRIF.View.SetAxisOffset(msg.view.name, node.axes, newOffset);
+    return msg;
+}
+
+// ViewShowAxis
+CNR.clientNodeInitFunctions.RRJSIATK_ViewShowAxis = function (node, mNode) {
+    node.shown = mNode.shown;
+    node.axes = mNode.axes.split(",");
+    return node;
+}
+
+CNR.clientFunctions.RRJSIATK_ViewShowAxis = function (msg, node) {
+    CNRIF.View.ShowAxis(msg.view.name, node.axes, node.shown);
+    return msg;
+}
+
+// ViewUpdateAxis
+CNR.clientNodeInitFunctions.RRJSIATK_ViewUpdateAxis = function (node, mNode) {
+    node.axes = mNode.axes.split(",");
+    return node;
+}
+
+CNR.clientFunctions.RRJSIATK_ViewUpdateAxis = function (msg, node) {
+    CNRIF.View.ViewUpdateAxis(msg.view.name, node.axes);
     return msg;
 }
 
 // ViewDestroyAxis
 CNR.clientNodeInitFunctions.RRJSIATK_ViewDestroyAxis = function (node, mNode) {
-    node.direction = mNode.direction;
+    node.axes = mNode.axes.split(",");
     return node;
 }
 
 CNR.clientFunctions.RRJSIATK_ViewDestroyAxis = function (msg, node) {
-    CNRIF.View.DestroyAxis(msg.view.name, node.direction);
+    CNRIF.View.DestroyAxis(msg.view.name, node.axes);
     return msg;
 }
 
@@ -702,9 +734,6 @@ function internal_VBCreateView(vbName) {
             delete CNRIF.VBCache[vbName];
             var viewContainer = {};
             viewContainer.view = view;
-            viewContainer.axisX = null;
-            viewContainer.axisY = null;
-            viewContainer.axisZ = null;
             CNRIF.ViewCache[CNRIF.ViewPrefix + vbName] = viewContainer;
         }
     }
@@ -1086,20 +1115,20 @@ function internal_ViewDestroy(viewName) {
     }
 }
 
-function internal_ViewAddAxes(viewName) {
+function internal_ViewAddAxes(viewName, axes) {
     try {
         var container = internal_util_RetrieveViewContainer(viewName, "internal_ViewAddAxes");
         if (container !== undefined) {
-            for (var i = 1; i < 4; i++) {
-                var field = internal_util_DirectionToField(i);
+            for (var i = 0; i < axes.length; i++) {
+                var axisField = axes[i];
+                if (container.hasOwnProperty(axisField)) {
+                    continue;
+                }
                 var axis = RT.UE.Object.Instantiate(RT.UE.Resources.Load("Axis")).GetComponent(CNRIF.IATK.Axis);
-                container[field] = axis;
+                container[axisField] = axis;
                 axis.transform.SetParent(container.view.transform);
-                var offset = -0.01;
-                var pos = [offset, offset, offset];
-                pos[i - 1] = 0;
-                RT.Unity.SetLocalPose(axis.gameObject, pos, [0, 0, 0, 1], [1, 1, 1]);
-                axis.SetDirection(i);
+                var dir = internal_util_SetAxisOffset(axis, axisField, 1);
+                axis.SetDirection(dir);
             }
         }
     }
@@ -1108,16 +1137,18 @@ function internal_ViewAddAxes(viewName) {
     }
 }
 
-function internal_ViewSetAxisData(viewName, dataName, direction, dimension) {
+function internal_ViewSetAxisData(viewName, dataName, axes, dimension) {
     try {
         var container = internal_util_RetrieveViewContainer(viewName);
         var data = internal_util_RetrieveRTDS(dataName);
         if (container !== undefined && data !== undefined) {
-            var axis = internal_util_GetAxis(container, direction, "internal_ViewSetAxisData", viewName)
-            if (axis !== undefined) {
-                var filter = new CNRIF.IATK.DimensionFilter();
-                filter.Attribute = dimension;
-                axis.Initialise(data, filter, null);
+            for (var i = 0; i < axes.length; i++) {
+                var axis = internal_util_GetAxis(container, axes[i], "internal_ViewSetAxisData", viewName);
+                if (axis !== undefined) {
+                    var filter = new CNRIF.IATK.DimensionFilter();
+                    filter.Attribute = dimension;
+                    axis.Initialise(data, filter, null);
+                }
             }
         }
     }
@@ -1126,13 +1157,15 @@ function internal_ViewSetAxisData(viewName, dataName, direction, dimension) {
     }
 }
 
-function internal_ViewShowAxis(viewName, direction, show) {
+function internal_ViewShowAxis(viewName, axes, show) {
     try {
         var container = internal_util_RetrieveViewContainer(viewName);
         if (container !== undefined) {
-            var axis = internal_util_GetAxis(container, direction, "internal_ViewShowAxis", viewName)
-            if (axis !== undefined) {
-                axis.gameObject.SetActive(show);
+            for (var i = 0; i < axes.length; i++) {
+                var axis = internal_util_GetAxis(container, axes[i], "internal_ViewShowAxis", viewName);
+                if (axis !== undefined) {
+                    axis.gameObject.SetActive(show);
+                }
             }
         }
     }
@@ -1141,13 +1174,15 @@ function internal_ViewShowAxis(viewName, direction, show) {
     }
 }
 
-function internal_ViewSetAxisLength(viewName, direction, newLength) {
+function internal_ViewSetAxisLength(viewName, axes, newLength) {
     try {
         var container = internal_util_RetrieveViewContainer(viewName);
         if (container !== undefined) {
-            var axis = internal_util_GetAxis(container, direction, "internal_ViewShowAxis", viewName)
-            if (axis !== undefined) {
-                axis.UpdateLength(newLength);
+            for (var i = 0; i < axes.length; i++) {
+                var axis = internal_util_GetAxis(container, axes[i], "internal_ViewSetAxisLength", viewName);
+                if (axis !== undefined) {
+                    axis.UpdateLength(newLength);
+                }
             }
         }
     }
@@ -1156,13 +1191,15 @@ function internal_ViewSetAxisLength(viewName, direction, newLength) {
     }
 }
 
-function internal_SetAxisTickSpacing(viewName, direction, newSpacing) {
+function internal_SetAxisTickSpacing(viewName, axes, newSpacing) {
     try {
         var container = internal_util_RetrieveViewContainer(viewName);
         if (container !== undefined) {
-            var axis = internal_util_GetAxis(container, direction, "internal_SetAxisTickSpacing", viewName)
-            if (axis !== undefined) {
-                axis.UpdateAxisTickSpacing(newSpacing);
+            for (var i = 0; i < axes.length; i++) {
+                var axis = internal_util_GetAxis(container, axes[i], "internal_SetAxisTickSpacing", viewName);
+                if (axis !== undefined) {
+                    axis.UpdateAxisTickSpacing(newSpacing);
+                }
             }
         }
     }
@@ -1171,15 +1208,50 @@ function internal_SetAxisTickSpacing(viewName, direction, newSpacing) {
     }
 }
 
-function internal_ViewDestroyAxis(viewName, direction) {
+function internal_SetAxisOffset(viewName, axes, newOffset) {
     try {
         var container = internal_util_RetrieveViewContainer(viewName);
         if (container !== undefined) {
-            var axis = internal_util_GetAxis(container, direction, "internal_ViewShowAxis", viewName)
-            if (axis !== undefined) {
-                RT.Unity.DestroyGO(axis.gameObject);
-                var field = internal_util_DirectionToField(direction);
-                container[field] = null;
+            for (var i = 0; i < axes.length; i++) {
+                var axis = internal_util_GetAxis(container, axes[i], "internal_SetAxisOffset", viewName);
+                if (axis !== undefined) {
+                    internal_util_SetAxisOffset(axis, axes[i], newOffset);
+                }
+            }
+        }
+    }
+    catch (err) {
+        console.log("internal_SetAxisOffset ERROR => " + err);
+    }
+}
+
+function internal_ViewUpdateAxis(viewName, axes) {
+    try {
+        var container = internal_util_RetrieveViewContainer(viewName);
+        if (container !== undefined) {
+            for (var i = 0; i < axes.length; i++) {
+                var axis = internal_util_GetAxis(container, axes[i], "internal_ViewUpdateAxes", viewName);
+                if (axis !== undefined) {
+                    axis.UpdateAxisTickLabels();
+                }
+            }
+        }
+    }
+    catch (err) {
+        console.log("internal_ViewUpdateAxes ERROR => " + err);
+    }
+}
+
+function internal_ViewDestroyAxis(viewName, axes) {
+    try {
+        var container = internal_util_RetrieveViewContainer(viewName);
+        if (container !== undefined) {
+            for (var i = 0; i < axes.length; i++) {
+                var axis = internal_util_GetAxis(container, axes[i], "internal_ViewDestroyAxis", viewName);
+                if (axis !== undefined) {
+                    RT.Unity.DestroyGO(axis.gameObject);
+                    delete container[field];
+                }
             }
         }
     }
@@ -1262,11 +1334,17 @@ function internal_RTDSGetData(dataName, dimension, isString) {
     try {
         var rtds = internal_util_RetrieveRTDS(dataName, "internal_RTDSGetData");
         if (rtds !== undefined) {
+            var data;
             if (isString) {
-                return rtds.GetDataByIdentifier(dimension).Data;
+                data = rtds.GetDataByIdentifier(dimension);
             }
             else {
-                return rtds.GetDataByIndex(dimension).Data;
+                data = rtds.GetDataByIndex(dimension);
+            }
+            if (data.MetaData.type === CNRIF.DataType.String) {
+                return rtds.GetTextualDimensionContent(dimension);
+            } else {
+                return data.Data;
             }
         }
     }
@@ -1332,7 +1410,7 @@ function internal_util_RetrieveViewContainer(viewName, caller) {
             var container = CNRIF.ViewCache[CNRIF.ViewPrefix + viewName];
             if (container == null || RT.Unity.IsNull(container.view)) {
                 delete CNRIF.ViewCache[CNRIF.ViewPrefix + viewName];
-                console.log("internal_util_RetrieveVB (" + caller + ") ERROR => View with name \"" + viewName + "\" appears to have been deleted");
+                console.log("internal_util_RetrieveViewContainer (" + caller + ") ERROR => View with name \"" + viewName + "\" appears to have been deleted");
                 return undefined;
             }
             return container;
@@ -1340,7 +1418,7 @@ function internal_util_RetrieveViewContainer(viewName, caller) {
 
         var go = RT.UE.GameObject.Find(CNRIF.ViewPrefix + viewName); // Undefined behavior if multiple views with the same name exist, should be avoided by user
         if (go == null) {
-            console.log("internal_util_RetrieveVB (" + caller + ") ERROR => failed retrieval of View with name \"" + viewName + "\"");
+            console.log("internal_util_RetrieveViewContainer (" + caller + ") ERROR => failed retrieval of View with name \"" + viewName + "\"");
             return undefined;
         }
 
@@ -1350,7 +1428,7 @@ function internal_util_RetrieveViewContainer(viewName, caller) {
         container.axisY = null;
         container.axisZ = null;
         if (container.view == null) {
-            console.log("internal_util_RetrieveVB (" + caller + ") ERROR => GameObject with name \"" + viewName + "\" is not a View");
+            console.log("internal_util_RetrieveViewContainer (" + caller + ") ERROR => GameObject with name \"" + viewName + "\" is not a View");
             return undefined;
         }
 
@@ -1358,7 +1436,7 @@ function internal_util_RetrieveViewContainer(viewName, caller) {
         return container;
     }
     catch (err) {
-        console.log("internal_util_RetrieveView (" + caller + ", \"" + viewName + "\") ERROR => " + err)
+        console.log("internal_util_RetrieveViewContainer (" + caller + ", \"" + viewName + "\") ERROR => " + err)
         return undefined;
     }
 }
@@ -1535,22 +1613,33 @@ function internal_util_GetLocation(msg, locationString) {
     }
 }
 
-function internal_util_DirectionToField(direction) {
-    switch (parseInt(direction, 10)) {
-        case 1: return "axisX"; break;
-        case 2: return "axisY"; break;
-        case 3: return "axisZ"; break;
-        default: return "INVALID"; break;
-    }
-}
-
-function internal_util_GetAxis(container, direction, caller, viewName) {
-    var field = internal_util_DirectionToField(direction);
-    if (container[field] != null) {
+function internal_util_GetAxis(container, field, caller, viewName) {
+    if (container.hasOwnProperty(field)) {
         return container[field];
     }
     else {
-        console.log("internal_util_GetAxis (\"" + caller + "\") ERROR => View \"" + viewName + "\" Direction " + direction + " has no axis");
+        console.log("internal_util_GetAxis (\"" + caller + "\") ERROR => View \"" + viewName + "\" Field " + field + " has no axis");
         return undefined;
     }
+}
+
+function internal_util_SetAxisOffset(axis, axisField, newOffset) {
+    var dir;
+    if (axisField.indexOf("x") !== -1) {
+        dir = 1;
+    } else if (axisField.indexOf("y") !== -1) {
+        dir = 2;
+    } else if (axisField.indexOf("z") !== -1) {
+        dir = 3;
+    } else {
+        console.log("internal_util_SetAxisOffset ERROR => invalid axis field: " + axisField);
+        return 0;
+    }
+    var offset = -0.01;
+    var pos = [axisField.indexOf("r") !== -1 ? -offset + newOffset : offset,
+    axisField.indexOf("u") !== -1 ? -offset + newOffset : offset,
+    axisField.indexOf("b") !== -1 ? -offset + newOffset : offset];
+    pos[dir - 1] = 0;
+    RT.Unity.SetLocalPose(axis.gameObject, pos, [0, 0, 0, 1], [1, 1, 1]);
+    return dir;
 }

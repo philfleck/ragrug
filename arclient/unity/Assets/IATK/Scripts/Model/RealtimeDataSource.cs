@@ -524,6 +524,15 @@ namespace IATK
 		}
 
         /// <summary>
+        /// Returns the content of a string dimension.
+        /// </summary>
+        /// <param name="dimensionName">Dimension Name.</param>
+        public string[] GetTextualDimensionContent(string dimensionName)
+        {
+            return textualDimensions[dimensionName];
+        }
+
+        /// <summary>
         /// Will always return true since the data is filled at runtime.
         /// </summary>
         /// <value></value>

@@ -195,7 +195,7 @@ function CNR_CreateNode(mNode) {
             if (amsg != null) {
                 for (var wwi = 0; wwi < w.length; wwi++) {
                     var ww = w[wwi];
-                    CNR.nodes[ww].run(amsg);
+                    CNR.nodes[ww].run(JSON.parse(JSON.stringify(amsg))); // Create new message object to prevent cross-contamination when using multiple outputs
                 }
             }
         }
