@@ -105,7 +105,7 @@ function IATKTest_UpdateView() {
 
 function IATKTest_UseVBIntegration_Dots() {
     var name = "Integration Test View Dots";
-    CNRIF.VB.CreateViewBuilder(CNRIF.MeshTopology.Points, name, CNRIF.GeometryType.Points, 0.01, 1);
+    CNRIF.VB.CreateViewBuilder(name, CNRIF.MeshTopology.Points, CNRIF.GeometryType.Points);
     CNRIF.VB.InitializeDataView(name, 4);
     CNRIF.VB.SetSpatialDimension(name, 0, [1, 1, 0, 0]);
     CNRIF.VB.SetSpatialDimension(name, 1, [1, 0, 0, 1]);
@@ -116,7 +116,7 @@ function IATKTest_UseVBIntegration_Dots() {
 
 function IATKTest_UseVBIntegration_Lines() {
     var name = "Integration Test View Lines";
-    CNRIF.VB.CreateViewBuilder(CNRIF.MeshTopology.Lines, name, CNRIF.GeometryType.Lines, 0.01, 1);
+    CNRIF.VB.CreateViewBuilder(name, CNRIF.MeshTopology.Lines, CNRIF.GeometryType.Lines);
     CNRIF.VB.InitializeDataView(name, 4);
     CNRIF.VB.SetSpatialDimension(name, 0, [2, 2, 0, 0]);
     CNRIF.VB.SetSpatialDimension(name, 1, [1, 0, 0, 1]);
@@ -130,7 +130,7 @@ function IATKTest_UseVBIntegration_Lines() {
 
 function IATKTest_UseVBIntegration_LinesViewInit() {
     var name = "Integration Test View Lines";
-    CNRIF.VB.CreateViewBuilder(CNRIF.MeshTopology.Lines, name, CNRIF.GeometryType.Lines, 0.01, 1);
+    CNRIF.VB.CreateViewBuilder(name, CNRIF.MeshTopology.Lines, CNRIF.GeometryType.Lines);
     CNRIF.VB.InitializeDataView(name, 4);
     CNRIF.VB.CreateView(name);
     CNRIF.View.SetData(name, CNRIF.ViewData.Indices, { isLinking: false, data: [0, 1, 0, 2, 0, 3, 1, 2, 1, 3, 2, 3] });
@@ -191,7 +191,7 @@ function IATKTest_StackedLines() {
     var name = "Stacked Lines";
 
     try {
-        CNRIF.VB.CreateViewBuilder(CNRIF.MeshTopology.Lines, name, CNRIF.GeometryType.Lines, 0.01, 1);
+        CNRIF.VB.CreateViewBuilder(name, CNRIF.MeshTopology.Lines, CNRIF.GeometryType.Lines);
         CNRIF.VB.InitializeDataView(name, 12);
         CNRIF.VB.SetSpatialDimension(name, 0, [0, 0.333, 0.666, 1, 0, 0.333, 0.666, 1, 0, 0.333, 0.666, 1]);
         CNRIF.VB.SetSpatialDimension(name, 1, [0, 0.2, 0.3, 0.1, 0, 0.3, 0.4, 0.2, 0, 0.5, 0.7, 0.8]);
@@ -211,7 +211,7 @@ function IATKTest_StackedLineBars() {
     var name = "Stacked Lines";
 
     try {
-        CNRIF.VB.CreateViewBuilder(CNRIF.MeshTopology.Lines, name, CNRIF.GeometryType.Lines, 0.01, 1);
+        CNRIF.VB.CreateViewBuilder(name, CNRIF.MeshTopology.Lines, CNRIF.GeometryType.Lines);
         CNRIF.VB.InitializeDataView(name, 18);
         CNRIF.VB.SetSpatialDimension(name, 0, [0, 0, 0, 0, 0, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1]);
         CNRIF.VB.SetSpatialDimension(name, 1, [0, 0.2, 0.2, 0.5, 0.5, 0.6, 0, 0.4, 0.4, 0.7, 0.7, 1, 0, 0.3, 0.3, 0.5, 0.5, 0.7]);
@@ -230,7 +230,7 @@ function IATKTest_Quads() {
     var name = "Integration Test View Dots";
     
     try {
-        CNRIF.VB.CreateViewBuilder(CNRIF.MeshTopology.Points, name, CNRIF.GeometryType.Quads, 0.01, 1);
+        CNRIF.VB.CreateViewBuilder(name, CNRIF.MeshTopology.Points, CNRIF.GeometryType.Quads);
         CNRIF.VB.InitializeDataView(name, 4);
         CNRIF.VB.SetSpatialDimension(name, 0, [1, 1, 0, 0]);
         CNRIF.VB.SetSpatialDimension(name, 1, [1, 0, 0, 1]);

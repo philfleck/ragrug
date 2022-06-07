@@ -1,3 +1,5 @@
+// Compatible with RagRug Node-RED package >1.3.0
+
 var CNRIF = {};
 CNRIF.VB = {};
 CNRIF.View = {};
@@ -19,7 +21,6 @@ CNRIF.View.Show = internal_ViewShow;
 CNRIF.View.SetData = internal_ViewSetData;
 CNRIF.View.SetAttribute = internal_ViewSetAttribute;
 CNRIF.View.GetAttribute = internal_ViewGetAttribute;
-CNRIF.View.SetAllChannels = internal_ViewSetAllChannels;
 CNRIF.View.TweenPosition = internal_ViewTweenPosition;
 CNRIF.View.TweenSize = internal_ViewTweenSize;
 CNRIF.View.GetPositions = internal_ViewGetPositions;
@@ -33,7 +34,7 @@ CNRIF.View.ShowAxis = internal_ViewShowAxis;
 CNRIF.View.SetAxisLength = internal_ViewSetAxisLength;
 CNRIF.View.SetAxisTickSpacing = internal_SetAxisTickSpacing;
 CNRIF.View.SetAxisOffset = internal_SetAxisOffset;
-CNRIF.View.ViewUpdateAxis = internal_ViewUpdateAxis;
+CNRIF.View.UpdateAxis = internal_ViewUpdateAxis;
 CNRIF.View.DestroyAxis = internal_ViewDestroyAxis;
 
 CNRIF.RTDS.Create = internal_RTDSCreate;
@@ -142,7 +143,7 @@ CNR.clientFunctions.RRJSIATK_ViewBuilder = function (msg, node) {
     var geometryType = internal_util_GetOrDefault(msg.viewBuilder, "geometryType", node.geometryType);
 
     // Call all parts of VB life cycle here since setting data and attributes can be done for views, avoid double implementation
-    CNRIF.VB.CreateViewBuilder(meshTopology, viewName, geometryType, 0.01, 1); // Initialize min/max size with sensible defaults, customizable through view
+    CNRIF.VB.CreateViewBuilder(viewName, meshTopology, geometryType);
     CNRIF.VB.InitializeDataView(viewName, pointCount);
     CNRIF.VB.CreateView(viewName);
 
@@ -565,9 +566,9 @@ CNR.clientNodeInitFunctions.RRJSIATK_ViewSetAxisLength = function (node, mNode) 
 CNR.clientFunctions.RRJSIATK_ViewSetAxisLength = function (msg, node) {
     var newLength = internal_util_GetLocation(msg, node.location);
     if (newLength === undefined) {
-        newLength = node.spacing;
+        newLength = node.newLength;
     }
-    CNRIF.View.SetAxisLength(msg.view.name, node.axes, node.newLength);
+    CNRIF.View.SetAxisLength(msg.view.name, node.axes, newLength);
     return msg;
 }
 
@@ -624,7 +625,7 @@ CNR.clientNodeInitFunctions.RRJSIATK_ViewUpdateAxis = function (node, mNode) {
 }
 
 CNR.clientFunctions.RRJSIATK_ViewUpdateAxis = function (msg, node) {
-    CNRIF.View.ViewUpdateAxis(msg.view.name, node.axes);
+    CNRIF.View.UpdateAxis(msg.view.name, node.axes);
     return msg;
 }
 
@@ -641,13 +642,18 @@ CNR.clientFunctions.RRJSIATK_ViewDestroyAxis = function (msg, node) {
 
 ///////////////////////////
 // IATK Interface Functions
-
-function internal_VBCreate(topology, vbName, geometry, minSize, maxSize) {
+/**
+ * Creates a ViewBuilder object.
+ * @param {string} vbName
+ * @param {number} topology
+ * @param {number} geometry
+ */
+function internal_VBCreate(vbName, topology, geometry) {
     try {
         var builder = new CNRIF.IATK.ViewBuilder(topology, ""); // Parent GameObject is discarded once View is created, name is irrelevant here
         var material = CNRIF.IATK.IATKUtil.GetMaterialFromTopology(geometry);
-        material.SetFloat("_MinSize", minSize);
-        material.SetFloat("_MaxSize", maxSize);
+        material.SetFloat("_MinSize", 0.01);
+        material.SetFloat("_MaxSize", 1);
 
         var instance = {};
         instance.builder = builder;
@@ -660,6 +666,11 @@ function internal_VBCreate(topology, vbName, geometry, minSize, maxSize) {
     }
 }
 
+/**
+ * Initializes the ViewBuilder's data.
+ * @param {string} vbName
+ * @param {number} pointCount
+ */
 function internal_VBInitializeDataView(vbName, pointCount) {
     try {
         var instance = internal_util_RetrieveVB(vbName);
@@ -672,6 +683,12 @@ function internal_VBInitializeDataView(vbName, pointCount) {
     }
 }
 
+/**
+ * Writes data to one of the ViewBuilder's spatial dimensions (XYZ).
+ * @param {string} vbName
+ * @param {number} dimension
+ * @param {number[]} data
+ */
 function internal_VBSetSpatialDimension(vbName, dimension, data) {
     try {
         var instance = internal_util_RetrieveVB(vbName)
@@ -684,6 +701,11 @@ function internal_VBSetSpatialDimension(vbName, dimension, data) {
     }
 }
 
+/**
+ * Sets the ViewBuilder's linking field.
+ * @param {string} vbName
+ * @param {number[]} data
+ */
 function internal_VBSetLinkingField(vbName, data) {
     try {
         var instance = internal_util_RetrieveVB(vbName)
@@ -696,6 +718,11 @@ function internal_VBSetLinkingField(vbName, data) {
     }
 }
 
+/**
+ * Sets the ViewBuilder's color field.
+ * @param {string} vbName
+ * @param {number[4][]} data
+ */
 function internal_VBSetColors(vbName, data) {
     try {
         var instance = internal_util_RetrieveVB(vbName)
@@ -708,6 +735,11 @@ function internal_VBSetColors(vbName, data) {
     }
 }
 
+/**
+ * Sets the ViewBuilder's size field.
+ * @param {string} vbName
+ * @param {number[]} data
+ */
 function internal_VBSetSizes(vbName, data) {
     try {
         var instance = internal_util_RetrieveVB(vbName)
@@ -720,6 +752,10 @@ function internal_VBSetSizes(vbName, data) {
     }
 }
 
+/**
+ * Creates a View, destroys the ViewBuilder.
+ * @param {string} vbName
+ */
 function internal_VBCreateView(vbName) {
     try {
         var instance = internal_util_RetrieveVB(vbName)
@@ -742,6 +778,11 @@ function internal_VBCreateView(vbName) {
     }
 }
 
+/**
+ * Hides or shows a View.
+ * @param {string} viewName
+ * @param {boolean} show
+ */
 function internal_ViewShow(viewName, show) {
     try {
         var view = internal_util_RetrieveViewContainer(viewName, "internal_ViewShow").view;
@@ -754,6 +795,12 @@ function internal_ViewShow(viewName, show) {
     }
 }
 
+/**
+ * Writes data to one of the View's data fields. 
+ * @param {string} viewName
+ * @param {number} type
+ * @param {any} data
+ */
 function internal_ViewSetData(viewName, type, data) {
     try {
         var view = internal_util_RetrieveViewContainer(viewName, "internal_ViewSetData").view;
@@ -822,18 +869,12 @@ function internal_ViewSetData(viewName, type, data) {
     }
 }
 
-function internal_ViewSetAllChannels(viewName, data) {
-    try {
-        var view = internal_util_RetrieveViewContainer(viewName, "internal_ViewSetAllChannels").view;
-        if (view !== undefined) {
-            view.SetColors(internal_util_DataToVector3(data));
-        }
-    }
-    catch (err) {
-        console.log("internal_ViewSetAllChannels ERROR => " + err)
-    }
-}
-
+/**
+ * Sets one of the View's attributes.
+ * @param {string} viewName
+ * @param {number} attribute
+ * @param {number} value
+ */
 function internal_ViewSetAttribute(viewName, attribute, value) {
     try {
         var view = internal_util_RetrieveViewContainer(viewName, "internal_ViewSetAttribute").view;
@@ -937,6 +978,11 @@ function internal_ViewSetAttribute(viewName, attribute, value) {
     }
 }
 
+/**
+ * Retrieves one of the View's attributes
+ * @param {string} viewName
+ * @param {number} attribute
+ */
 function internal_ViewGetAttribute(viewName, attribute) {
     try {
         var view = internal_util_RetrieveViewContainer(viewName, "internal_ViewGetAttribute").view;
@@ -1025,6 +1071,11 @@ function internal_ViewGetAttribute(viewName, attribute) {
     }
 }
 
+/**
+ * Sets the main texture of the View's render material.
+ * @param {string} viewName
+ * @param {UnityEngine.Texture} texture
+ */
 function internal_ViewSetMainTexture(viewName, texture) {
     try {
         var view = internal_util_RetrieveViewContainer(viewName, "internal_ViewSetMainTexture").view;
@@ -1037,7 +1088,10 @@ function internal_ViewSetMainTexture(viewName, texture) {
     }
 }
 
-// Appears to be broken on IATK's side, still here for completeness
+/**
+ * Sets a View's TweenPosition flag. Appears to be broken on IATK's side.
+ * @param {string} viewName
+ */
 function internal_ViewTweenPosition(viewName) {
     try {
         var view = internal_util_RetrieveViewContainer(viewName, "internal_ViewTweenPosition").view;
@@ -1050,7 +1104,10 @@ function internal_ViewTweenPosition(viewName) {
     }
 }
 
-// Appears to be broken on IATK's side, still here for completeness
+/**
+ * Sets a View's TweenSize flag. Appears to be broken on IATK's side.
+ * @param {string} viewName
+ */
 function internal_ViewTweenSize(viewName) {
     try {
         var view = internal_util_RetrieveViewContainer(viewName, "internal_ViewTweenSize").view;
@@ -1063,6 +1120,11 @@ function internal_ViewTweenSize(viewName) {
     }
 }
 
+/**
+ * Retrieves a View's positions.
+ * @param {string} viewName
+ * @returns {number[3][]}
+ */
 function internal_ViewGetPositions(viewName) {
     try {
         var view = internal_util_RetrieveViewContainer(viewName, "internal_ViewGetPositions").view;
@@ -1076,6 +1138,11 @@ function internal_ViewGetPositions(viewName) {
     }
 }
 
+/**
+ * Retrieves a View's colors.
+ * @param {string} viewName
+ * @returns {number[4][]}
+ */
 function internal_ViewGetColors(viewName) {
     try {
         var view = internal_util_RetrieveViewContainer(viewName, "internal_ViewGetColors").view;
@@ -1089,6 +1156,11 @@ function internal_ViewGetColors(viewName) {
     }
 }
 
+/**
+ * Retrieves a View's filter channel.
+ * @param {string} viewName
+ * @returns {number[]}
+ */
 function internal_ViewGetFilter(viewName) {
     try {
         var view = internal_util_RetrieveViewContainer(viewName, "internal_ViewGetFilter").view;
@@ -1102,6 +1174,10 @@ function internal_ViewGetFilter(viewName) {
     }
 }
 
+/**
+ * Destroys a View.
+ * @param {string} viewName
+ */
 function internal_ViewDestroy(viewName) {
     try {
         var container = internal_util_RetrieveViewContainer(viewName, "internal_ViewDestroy");
@@ -1115,6 +1191,11 @@ function internal_ViewDestroy(viewName) {
     }
 }
 
+/**
+ * Adds axes to a View.
+ * @param {string} viewName
+ * @param {string[]} axes
+ */
 function internal_ViewAddAxes(viewName, axes) {
     try {
         var container = internal_util_RetrieveViewContainer(viewName, "internal_ViewAddAxes");
@@ -1137,6 +1218,13 @@ function internal_ViewAddAxes(viewName, axes) {
     }
 }
 
+/**
+ * Links a Realtime Data Source to one or more axes.
+ * @param {string} viewName
+ * @param {string} dataName
+ * @param {string[]} axes
+ * @param {string} dimension
+ */
 function internal_ViewSetAxisData(viewName, dataName, axes, dimension) {
     try {
         var container = internal_util_RetrieveViewContainer(viewName);
@@ -1157,6 +1245,12 @@ function internal_ViewSetAxisData(viewName, dataName, axes, dimension) {
     }
 }
 
+/**
+ * Hides or shows one or more axes.
+ * @param {string} viewName
+ * @param {string[]} axes
+ * @param {boolean} show
+ */
 function internal_ViewShowAxis(viewName, axes, show) {
     try {
         var container = internal_util_RetrieveViewContainer(viewName);
@@ -1174,6 +1268,12 @@ function internal_ViewShowAxis(viewName, axes, show) {
     }
 }
 
+/**
+ * Sets the length of one or more axes.
+ * @param {string} viewName
+ * @param {string[]} axes
+ * @param {number} newLength
+ */
 function internal_ViewSetAxisLength(viewName, axes, newLength) {
     try {
         var container = internal_util_RetrieveViewContainer(viewName);
@@ -1191,6 +1291,12 @@ function internal_ViewSetAxisLength(viewName, axes, newLength) {
     }
 }
 
+/**
+ * Sets the tick spacing of one or more axes.
+ * @param {string} viewName
+ * @param {string[]} axes
+ * @param {number} newSpacing
+ */
 function internal_SetAxisTickSpacing(viewName, axes, newSpacing) {
     try {
         var container = internal_util_RetrieveViewContainer(viewName);
@@ -1208,6 +1314,12 @@ function internal_SetAxisTickSpacing(viewName, axes, newSpacing) {
     }
 }
 
+/**
+ * Sets the offset of one or more axes.
+ * @param {string} viewName
+ * @param {string[]} axes
+ * @param {number} newOffset
+ */
 function internal_SetAxisOffset(viewName, axes, newOffset) {
     try {
         var container = internal_util_RetrieveViewContainer(viewName);
@@ -1225,6 +1337,11 @@ function internal_SetAxisOffset(viewName, axes, newOffset) {
     }
 }
 
+/**
+ * Updates the axis tick labels of one or more axes.
+ * @param {string} viewName
+ * @param {string[]} axes
+ */
 function internal_ViewUpdateAxis(viewName, axes) {
     try {
         var container = internal_util_RetrieveViewContainer(viewName);
@@ -1242,6 +1359,11 @@ function internal_ViewUpdateAxis(viewName, axes) {
     }
 }
 
+/**
+ * Destroys one or more axes.
+ * @param {string} viewName
+ * @param {string[]} axes
+ */
 function internal_ViewDestroyAxis(viewName, axes) {
     try {
         var container = internal_util_RetrieveViewContainer(viewName);
@@ -1260,6 +1382,11 @@ function internal_ViewDestroyAxis(viewName, axes) {
     }
 }
 
+/**
+ * Creates a Realtime Data Source.
+ * @param {string} dataName
+ * @param {number} dimensionSize
+ */
 function internal_RTDSCreate(dataName, dimensionSize) {
     try {
         var go = new RT.UE.GameObject(CNRIF.DataSourcePrefix + dataName);
@@ -1272,6 +1399,14 @@ function internal_RTDSCreate(dataName, dimensionSize) {
     }
 }
 
+/**
+ * Adds a numeric dimension to a Realtime Data Source.
+ * @param {string} dataName
+ * @param {string} dimensionName
+ * @param {number} min
+ * @param {number} max
+ * @param {number} dataType
+ */
 function internal_RTDSAddDimension(dataName, dimensionName, min, max, dataType) {
     try {
         var rtds = internal_util_RetrieveRTDS(dataName, "internal_RTDSAddDimension");
@@ -1289,6 +1424,11 @@ function internal_RTDSAddDimension(dataName, dimensionName, min, max, dataType) 
     }
 }
 
+/**
+ * Adds a string dimension to a Realtime Data Source.
+ * @param {string} dataName
+ * @param {string} dimensionName
+ */
 function internal_RTDSAddDimensionDiscrete(dataName, dimensionName) {
     try {
         var rtds = internal_util_RetrieveRTDS(dataName, "internal_RTDSAddDimensionDiscrete");
@@ -1306,6 +1446,13 @@ function internal_RTDSAddDimensionDiscrete(dataName, dimensionName) {
     }
 }
 
+/**
+ * Adds a value to a Realtime Data Source. Use context of 0 for numeric dimensions, context of 1 for string dimensions.
+ * @param {string} dataName
+ * @param {string} dimension
+ * @param {any} value
+ * @param {number} context
+ */
 function internal_RTDSSetData(dataName, dimension, value, context) {
     try {
         var rtds = internal_util_RetrieveRTDS(dataName, "internal_RTDSSetData");
@@ -1330,6 +1477,13 @@ function internal_RTDSSetData(dataName, dimension, value, context) {
     }
 }
 
+/**
+ * Retrieves all data of a Realtime Data Source dimension.
+ * @param {string} dataName
+ * @param {string} dimension
+ * @param {boolean} isString
+ * @returns {any[]}
+ */
 function internal_RTDSGetData(dataName, dimension, isString) {
     try {
         var rtds = internal_util_RetrieveRTDS(dataName, "internal_RTDSGetData");
@@ -1354,6 +1508,11 @@ function internal_RTDSGetData(dataName, dimension, isString) {
     }
 }
 
+/**
+ * Sets the shift mode of a Realtime Data Source.
+ * @param {string} dataName
+ * @param {boolean} value
+ */
 function internal_RTDSSetShiftData(dataName, value) {
     try {
         var rtds = internal_util_RetrieveRTDS(dataName, "internal_RTDSSetShiftData");
@@ -1366,6 +1525,11 @@ function internal_RTDSSetShiftData(dataName, value) {
     }
 }
 
+/**
+ * Retrieves the shift mode of a Realtime Data Source.
+ * @param {string} dataName
+ * @returns {boolean}
+ */
 function internal_RTDSGetShiftData(dataName)
 {
     try {
@@ -1380,6 +1544,10 @@ function internal_RTDSGetShiftData(dataName)
     }
 }
 
+/**
+ * Destroys a Realtime Data Source
+ * @param {string} dataName
+ */
 function internal_RTDSDestroy(dataName) {
     try {
         var rtds = internal_util_RetrieveRTDS(dataName, "internal_RTDSDestroy");
@@ -1404,6 +1572,11 @@ function internal_util_RetrieveVB(vbName) {
     return undefined;
 }
 
+/**
+ * Retrieves a View container.
+ * @param {any} viewName
+ * @param {any} caller
+ */
 function internal_util_RetrieveViewContainer(viewName, caller) {
     try {
         if (CNRIF.ViewCache.hasOwnProperty(CNRIF.ViewPrefix + viewName)) {
