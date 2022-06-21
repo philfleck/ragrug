@@ -321,6 +321,57 @@ function CNR_CreateNode(mNode) {
         };
     }
 
+    if (node.type == "http request") {
+        node.url = mNode.url;
+        node.method = mNode.method;
+        node.ret = mNode.ret; // txt, bin, obj
+        node.paytoqs = mNode.paytoqs; // ignore, query, body
+        node.func = function (msg, node) {
+            var url = node.url;
+            if (url.length === 0) {
+                if (msg.hasOwnProperty("url")) {
+                    url = msg.url;
+                }
+                else {
+                    console.log("CNR ERROR: neither http request node " + mNode.id + " nor message have url.")
+                }
+            }
+            var method = node.method;
+            if (method === "use") {
+                if (msg.hasOwnProperty("method")) {
+                    method = msg.method;
+                } else {
+                    console.log("CNR ERROR: http request node " + mNode.id + " is set to use method of message, but message has no method.");
+                }
+            }
+            var payload = "";
+            if (node.paytoqs === "body") {
+                if (msg.hasOwnProperty("payload")) {
+                    payload = msg.payload;
+                } else {
+                    console.log("CNR ERROR: http request node " + mNode.id + " is set to use msg payload, but msg has no payload.")
+                }
+            }
+            var headers = msg.hasOwnProperty("headers") ? msg.headers : [];
+            RT.Web.SendWebReq(method, url, headers, payload,
+                function (mError, mData) {
+                    var resultMsg = {};
+                    if (node.ret === "obj") {
+                        try {
+                            resultMsg.payload = JSON.parse(mData);
+                        } catch (e) {
+                            resultMsg.payload = mData;
+                        }
+                    } else {
+                        resultMsg.payload = mData;
+                    }
+                    resultMsg.statusCode = mError;
+                    node.emit(resultMsg);
+                });
+        }
+    }
+
+    //create button node
     if (node.type == "ui_button") {
         var name = "UIBTN-" + mNode.label;
         var msg = {};
@@ -336,6 +387,7 @@ function CNR_CreateNode(mNode) {
         CNR.flowMemory[CNR.flowId].objects.push(button);
     }
 
+    //create button group node
     if (node.type == "mrtk-button-group") {
         var name = "BTNGRP-" + mNode.name;
         var prefab = "NearMenu" + mNode.layout;
