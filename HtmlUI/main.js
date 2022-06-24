@@ -3273,8 +3273,8 @@ function MAIN_CreateLabel(mName, mTranslation, mRotation, mScale, mParent, mLabe
         var content = '<div id="thislabel" style="position: absolute;top: \
 position: absolute;top: 0;left: 0; \
 height: auto; margin: 2vh; padding: 2vh; font-size: 14vh; \
-font-weight: bold; color: rgb(238, 238, 238); \
-background-color: rgb(0, 77, 109); border: solid rgb(238, 238, 238) 2px; \
+font-weight: bold; color: rgb(63, 63, 63); \
+background-color: rgb(163, 163, 163); border: solid rgb(238, 238, 238) 2px; \
 display: block; border-radius: 5px;">' + mLabelText + '</div>';
         var tWu1 = RT.Unity.CreateWU(mName, content, false, 700, 360);
         tWu1.SetOrigin(0.5, 0.5);

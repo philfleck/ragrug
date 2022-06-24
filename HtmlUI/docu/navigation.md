@@ -4,6 +4,8 @@
 
 [Changelog](changelog.md)
 
+[Runtime JS API](cnrif.md)
+
 [Tutorials](tutorials.md)
 
 [Materials]()
