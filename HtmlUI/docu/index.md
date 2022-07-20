@@ -11,10 +11,10 @@ Components are usually based on well known commodity software, but can also be p
 ### Hub API
 #### Rest
 ```
-GET /getfile?name=myfilename => will server a file from /ragrug_mnt/outputs
+GET /getfile?name=myfilename => will server a file from /data/outputs
 ```
 ```
-GET /getfile2?name=myfilename => will server a file from /ragrug_mnt/uploads
+GET /getfile2?name=myfilename => will server a file from /data/uploads
 ```
 ### Components
 #### NodeRed

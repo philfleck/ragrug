@@ -16,16 +16,14 @@ echo "Project: $APPNAME"
 #docker rm my-couchdb
 #docker run -d -v $(pwd)/../couch_data:/opt/couchdb/data -p 5984:5984 --net vz_auth_net --name my-couchdb couchdb
 
-#mkdir -p ../../mnt/node-red/config
-#rm ../../mnt/node-red/config/settings.js
-#cp settings.js ../../mnt/node-red/config/settings.js
+#cp -f settings.js ../../mnt/settings.js
 
 docker stop $APPNAME
 docker build --force-rm -t $PRJNAME .
 docker rm $APPNAME
 docker run \
        -tid \
-       -v $(pwd)/../../mnt:/ragrug_mnt \
+       -v $(pwd)/../../mnt:/data \
        --name $APPNAME \
        -p 1880:1880 \
        --net $NET \
@@ -33,7 +31,7 @@ docker run \
        $PRJNAME 
        #/bin/bash
 
-#docker run -it -v $(pwd)/../../mnt:/ragrug_mnt --name $APPNAME -p 1880:1880 --net $NET $PRJNAME
+#docker run -it -v $(pwd)/../../mnt:/data --name $APPNAME -p 1880:1880 --net $NET $PRJNAME
 #docker run -p 3000:3000 -d $APPNAME
 
 

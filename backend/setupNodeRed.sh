@@ -1,5 +1,4 @@
 docker stop app-ragrug-server
-rm -rf $(pwd)/../mnt/node-red/settings.js
-cp node-red/settings.js $(pwd)/../mnt/node-red/settings.js
-cp -n node-red/flows/rr_002.json $(pwd)/../mnt/node-red/flows.json
+cp -f node-red/settings.js $(pwd)/../mnt/settings.js
+cp -n node-red/flows/rr_last.json $(pwd)/../mnt/flows.json
 docker start app-ragrug-server
