@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARInfo>
+<TargetSet version="14.0" toolVersion="9.3.3">
+<ModelTarget name="rockpro64_clean_centered_scaled" targetId="04f9d79ae808495dbe4c5d7911eca0b7" version="11.1" toolVersion="9.3.3" bbox="-0.078477 -0.051295 -0.011722 0.075282 0.044482 0.017333" previewImage="04f9d79ae808495dbe4c5d7911eca0b7_preview.jpg"/>
+
+</TargetSet>
+
+<Assembly name="rockpro64_clean_centered_scaleds_assembly" assemblyId="67d4a399ec774f5c9536e054139d8990">
+<Part name="rockpro64_clean_centered_scaled" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="-0.0013483 -0.00260804 0.141282" rotation="AD: 0.9999999838756731 0.03601705188749767 -0.0050377471479093015 164.086" image="rockpro64_clean_centered_scaled_viewpoint_0000.png" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARInfo>

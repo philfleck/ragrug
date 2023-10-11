@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARInfo>
+<TargetSet version="14.0" toolVersion="9.3.3">
+<ModelTarget name="RaspberryPiZeroW" targetId="aafb97898be447028fad03f164927ad5" version="11.1" toolVersion="9.3.3" bbox="-0.033400 -0.000000 -0.015000 0.032500 0.004800 0.016250" previewImage="aafb97898be447028fad03f164927ad5_preview.jpg"/>
+
+</TargetSet>
+
+<Assembly name="RaspberryPiZeroWs_assembly" assemblyId="231389b9a12c489cbbcb9577de598032">
+<Part name="RaspberryPiZeroW" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="0.000621461 -0.000510057 0.0576358" rotation="AD: -0.8944907679253058 -0.9082150586316508 0.8875224822271803 118.978" image="RaspberryPiZeroW_viewpoint_0000.png" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARInfo>

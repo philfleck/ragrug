@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARInfo>
+<TargetSet version="20.0" toolVersion="9.3.3">
+<ModelTarget name="rockpro64_rec" targetId="1254f07c003342b48d931fbc89b0c287" version="11.1" toolVersion="9.3.3" bbox="-0.657894 -0.628904 1.359550 0.976512 0.737825 2.412330" previewImage="1254f07c003342b48d931fbc89b0c287_preview.jpg"/>
+
+</TargetSet>
+
+<Assembly name="rockpro64_recs_assembly" assemblyId="b212ccaeb7a74039b1f66ae02add3940">
+<Part name="rockpro64_rec" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="-0.602559 -1.46058 1.28524" rotation="AD: 0.24943446725822432 1.1057098382766373 2.070946632494 173.543" image="rockpro64_rec_viewpoint_0000.png" trained="yes">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARInfo>

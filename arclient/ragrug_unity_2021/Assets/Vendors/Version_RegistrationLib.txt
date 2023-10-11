@@ -1,0 +1,2 @@
+{ "version":"23.02.20.07", "commit":"3f4ca8f3ac77feaabb97935abb8291c3ab3f8f38", "arfoundationversion":"2.1.19" }
+{ "version":"23.02.20.07", "commit":"3f4ca8f3ac77feaabb97935abb8291c3ab3f8f38", "arfoundationversion":"4.2.3" }

@@ -1,0 +1,8 @@
+  <Extensions>
+    <Extension Category="windows.activatableClass.inProcessServer">
+      <InProcessServer>
+        <Path>Vizario.CoreBridgeSink.dll</Path>
+        <ActivatableClass ActivatableClassId="Vizario.CoreBridgeSink.CoreBridgeMediaSinkProxy" ThreadingModel="both" />
+      </InProcessServer>
+    </Extension>
+  </Extensions>

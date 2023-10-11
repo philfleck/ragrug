@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARInfo>
+<TargetSet version="14.0" toolVersion="9.3.3">
+<ModelTarget name="Murcielago assembly" targetId="71e974c3d4824f098b32db96512c52e5" version="11.1" toolVersion="9.3.3" bbox="-3.046000 1.658250 1.142864 -0.829999 2.935945 5.721047" previewImage="71e974c3d4824f098b32db96512c52e5_preview.jpg"/>
+
+</TargetSet>
+
+<Assembly name="Murcielago assemblys_assembly" assemblyId="8208421cf4c4423eb59fa3be0390416d">
+<Part name="Murcielago assembly" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="murci1" translation="0.739239 1.24706 9.52134" rotation="AD: 0.999943724042936 0.03726148338891596 -0.2994850765022617 193.585" image="Murcielago assembly_murci1.png" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARInfo>

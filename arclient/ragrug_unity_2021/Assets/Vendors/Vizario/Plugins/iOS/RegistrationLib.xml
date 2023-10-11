@@ -1,0 +1,227 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RegistrationLib</name>
+    </assembly>
+    <members>
+        <member name="M:Vizario.RegistrationLib.FileReadWriteUtils.CopyFileFromStreamingAssetsToPersistentPath(System.String,System.String,System.Boolean)">
+            <summary>
+            Copies a file from streaming assets to persistent via read/write
+            </summary>
+            <param name="srcfilename">plain source file name</param>
+            <param name="dstfilename">plain source file name</param>
+        </member>
+        <member name="M:Vizario.RegistrationLib.FileReadWriteUtils.WriteStringToFile(System.String,System.String)">
+            <summary>
+            This is directly taken from FileReadWrite.cs in Vizario.Core and only works for persistent folder!
+            </summary>
+            <param name="path">Path to file.</param>
+            <param name="data">string to be written.</param>
+        </member>
+        <member name="M:Vizario.RegistrationLib.FileReadWriteUtils.ReadFileAsString(System.String,System.Boolean)">
+            <summary>
+            This is directly taken from FileReadWrite.cs in Vizario.Core and only works for persistent folder!
+            </summary>
+            <param name="path">Path to file.</param>
+            <param name="streamingassets">Is to be read from streaming assets folder</param>
+        </member>
+        <member name="T:Vizario.RegistrationLib.RegistrationLib">
+            <summary>
+            The main class for holding the library functions.
+            </summary>
+        </member>
+        <member name="F:Vizario.RegistrationLib.RegistrationLib.m_props">
+            Internal copy of compression props
+        </member>
+        <member name="F:Vizario.RegistrationLib.RegistrationLib.m_isInitialized">
+            
+        </member>
+        <member name="F:Vizario.RegistrationLib.RegistrationLib.m_hasCallback">
+            
+        </member>
+        <member name="T:Vizario.RegistrationLib.RegistrationLib.PoseCallback">
+            <summary>
+            Delegate to forward data from one instance to another
+            </summary>
+            <example>
+            <code>
+            </code>
+            </example>
+            <param name="res">returned registration result</param>
+            <see cref="T:Vizario.RegistrationLib.RegistrationLib.PoseCallback"/>
+        </member>
+        <member name="T:Vizario.RegistrationLib.RegistrationLib.PoseCallbackInternal">
+            <summary>
+            Internal delegate to retrieve JSON data and convert it into a real callback
+            </summary>
+            <param name="data">JSON string to contain pose information.</param>
+        </member>
+        <member name="T:Vizario.RegistrationLib.RegistrationLib.InternalCallbackHelper">
+            <summary>
+            internal class to hold callback later called from static method
+            </summary>
+        </member>
+        <member name="T:Vizario.RegistrationLib.RegistrationLib.AlgorithmProperties">
+            <summary>
+            Property structure to pass to configure function
+            </summary>
+            <param name="matching_method">method used to find correspondences</param>
+            <param name="max_plane_area">maximum plane size used in the ppf creation to avoid features from walls, floor, etc.</param>
+            <param name="max_plane_ratio">maximum plane aspect ratio used in the ppf creation to avoid eccentric/usless planes</param>
+            <param name="ppfs_threshold">threshold for the maximum dissimilarity between a model-to-scene feature correspondence</param>
+            <param name="ppfs_normd_eps">threshold for the maximum dissimilarity of the 3D distance between points of the features</param>
+            <param name="ppfs_quat_eps">threshold for the maximum dissimilarity of the relative orientation primitives of the features</param>
+            <param name="ppfs_pos_eps">threshold for the maximum dissimilarity of the relative position primitives of the features</param>
+            <param name="ppfs_areas_eps">threshold for the maximum dissimilarity of the surface area between primitives of the features</param>
+            <param name="ppfs_lengths_eps">threshold for the maximum dissimilarity of the sizes between primitives of the features</param>
+            <param name="ppfs_ratio_eps">threshold for the maximum dissimilarity of the aspect ratio between primitives of the features</param>
+            <param name="ppfs_votes_std">statistical threshold used to remove feature matches with a low number of votes</param>
+            <param name="allow_multiple_matches">use the feature with minimum ppfs_threshold, or all below ppfs_threshold</param>
+            <param name="solution_test_mode">Registration solution acceptance criteria (0,1,2,3). Strict to soft.</param>
+            <param name="solution_thresh_nde">maximum normal deviation error obtained from the estimated 6DoF transformation</param>
+            <param name="solution_thresh_pde">maximum point deviation error obtained from the estimated 6DoF transformation</param>
+            <param name="report_inverse_pose">return the inverse pose instead of the pose</param>
+            <param name="verbosity_level">indicates the level of verbose output to console</param>
+        </member>
+        <member name="T:Vizario.RegistrationLib.RegistrationLib.Result">
+            <summary>
+            Property structure to return registration result
+            </summary>
+            <param name="success">success indicator for registration</param>
+            <param name="position">position of object</param>
+            <param name="rotation">rotation of object</param>
+            <param name="pose">4x4 matrix</param>
+        </member>
+        <member name="T:Vizario.RegistrationLib.RegistrationLib.ResultInt">
+            <summary>
+            Internal Property structure for parsing registration result
+            </summary>
+            <param name="success">success indicator for registration</param>
+            <param name="pose">list of float values to be assembled into a Matrix</param>
+        </member>
+        <member name="T:Vizario.RegistrationLib.RegistrationLib.ResultStats">
+            <summary>
+            Property structure to return registration result stats
+            </summary>
+            <param name="pose">matrix</param>
+        </member>
+        <member name="T:Vizario.RegistrationLib.RegistrationLib.FileType">
+            <summary>
+            definition of some file types
+            </summary>
+        </member>
+        <member name="M:Vizario.RegistrationLib.RegistrationLib.#ctor(System.Boolean@)">
+            <summary>
+            Create a Registration Engine
+            </summary>
+            <param name="success">Output parameter to indicate success or failure of operation</param>
+        </member>
+        <member name="M:Vizario.RegistrationLib.RegistrationLib.Configure(Vizario.RegistrationLib.RegistrationLib.AlgorithmProperties)">
+            <summary>
+            Function to configure the algorithm in the registration library
+            </summary>
+            <param name="props">Input parameter with certain properties specifying the algorithm.</param>
+        </member>
+        <member name="M:Vizario.RegistrationLib.RegistrationLib.Configure(System.String)">
+            <summary>
+            Function to configure the algorithm in the registration library
+            </summary>
+            <returns>
+            true or false
+            </returns>
+            <param name="jsonstring">Input parameter with certain properties specifying the algorithm as a json string.</param>
+        </member>
+        <member name="M:Vizario.RegistrationLib.RegistrationLib.Configure(System.String,Vizario.RegistrationLib.RegistrationLib.FileType,System.Boolean)">
+            <summary>
+            Function to configure the algorithm in the registration library
+            </summary>
+            <param name="filename">Input parameter denoting the configuration as a file.</param>
+            <param name="type">Input parameter denoting the file type (TXT or JSON)</param>
+        </member>
+        <member name="M:Vizario.RegistrationLib.RegistrationLib.LoadModelFromJsonString(System.String)">
+            <summary>
+            Function to load a model from a jsonstring.
+            </summary>
+            <returns>
+            true or false
+            </returns>
+            <example>
+            <code>
+            </code>
+            </example>
+            <param name="jsonstring">Input parameter denoting the model as a json string.</param>
+        </member>
+        <member name="M:Vizario.RegistrationLib.RegistrationLib.LoadModelFromFile(System.String,Vizario.RegistrationLib.RegistrationLib.FileType,System.Boolean)">
+            <summary>
+            Function to load a model from a file.
+            </summary>
+            <returns>
+            true or false
+            </returns>
+            <example>
+            <code>
+            </code>
+            </example>
+            <param name="filename">Input parameter denoting the model as a file.</param>
+            <param name="type">Input parameter denoting the file type (TXT or JSON)</param>
+            <param name="isStreamingAssets">Input parameter denoting if file resides in streaming assets folder.</param>
+        </member>
+        <member name="M:Vizario.RegistrationLib.RegistrationLib.RegisterSceneFromJsonString(System.String)">
+            <summary>
+            Function to register a scene from a jsonstring.
+            </summary>
+            <returns>
+            true or false
+            </returns>
+            <example>
+            <code>
+            </code>
+            </example>
+            <param name="jsonstring">Input parameter denoting the scene as a json string.</param>
+        </member>
+        <member name="M:Vizario.RegistrationLib.RegistrationLib.RegisterSceneFromFile(System.String,Vizario.RegistrationLib.RegistrationLib.FileType,System.Boolean)">
+            <summary>
+            Function to register with a scene from a file.
+            </summary>
+            <returns>
+            true or false
+            </returns>
+            <example>
+            <code>
+            </code>
+            </example>
+            <param name="filename">Input parameter denoting the scene as a file.</param>
+            <param name="type">Input parameter denoting the file type (TXT or JSON)</param>
+            <param name="isStreamingAssets">Input parameter denoting if file resides in streaming assets folder.</param>
+        </member>
+        <member name="M:Vizario.RegistrationLib.RegistrationLib.InternalCallbackDelegate(System.String)">
+            <summary>
+            Internal Callback to handle returned data
+            </summary>
+        </member>
+        <member name="M:Vizario.RegistrationLib.RegistrationLib.RegisterPoseCallback(Vizario.RegistrationLib.RegistrationLib.PoseCallback)">
+            <summary>
+            Register a callback to retrieve pose information
+            </summary>
+            <returns>
+            true on success, false if otherwise
+            </returns>
+            <param name="callback">PoseCallback function called once registration run finished.</param>
+            <seealso cref="T:Vizario.RegistrationLib.RegistrationLib.PoseCallback"/>
+        </member>
+        <member name="M:Vizario.RegistrationLib.RegistrationLib.UnRegisterPoseCallback">
+            <summary>
+            Unregister a callback to retrieve pose information
+            </summary>
+            <returns>
+            true on success, false if otherwise
+            </returns>
+            <seealso cref="T:Vizario.RegistrationLib.RegistrationLib.PoseCallback"/>
+        </member>
+        <member name="M:Vizario.RegistrationLib.RegistrationLib.Dispose">
+            <summary>
+            Stop Registration engine and release resources.
+            </summary>
+        </member>
+    </members>
+</doc>
